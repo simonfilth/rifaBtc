@@ -1,0 +1,144 @@
+body{
+    background-color: #a7b3bc; 
+}
+.huge {
+    font-size: 40px;
+}
+
+.panel-green {
+    border-color: #5cb85c;
+}
+
+.panel-green > .panel-heading {
+    border-color: #5cb85c;
+    color: #fff;
+    background-color: #5cb85c;
+}
+
+.panel-green > a {
+    color: #5cb85c;
+}
+
+.panel-green > a:hover {
+    color: #3d8b3d;
+}
+
+.panel-red {
+    border-color: #d9534f;
+}
+
+.panel-red > .panel-heading {
+    border-color: #d9534f;
+    color: #fff;
+    background-color: #d9534f;
+}
+
+.panel-red > a {
+    color: #d9534f;
+}
+
+.panel-red > a:hover {
+    color: #b52b27;
+}
+
+.panel-yellow {
+    border-color: #f0ad4e;
+}
+
+.panel-yellow > .panel-heading {
+    border-color: #f0ad4e;
+    color: #fff;
+    background-color: #f0ad4e;
+}
+
+.panel-yellow > a {
+    color: #f0ad4e;
+}
+
+.panel-yellow > a:hover {
+    color: #df8a13;
+}
+
+.navbar-principal{
+    background-color: #505e6d;
+    border-color: #e7e7e7;
+    height: 50px;
+}
+
+.navbar-principal ul{
+    background-color: #505e6d;
+}
+.navbar-brand {
+    color: white !important;
+}
+
+.navbar-brand:hover {
+    color: white !important;
+}
+.navbar-nav-principal a{
+    color: white !important;
+    background-color: #505e6d!important;
+}
+/*.navbar-nav-principal li{
+    margin-top: 10px;
+
+}*/
+.navbar-nav-principal ul{
+    /*border: 1px solid white;*/
+}
+.navbar-nav-principal a:hover {
+    color: #505e6d !important;
+    border-bottom: 1px solid white;
+    background-color: white!important;
+}
+.navbar-nav-principal a:focus {
+    background-color: #1fcdd3!important;
+    color: #e1ffff !important;
+}
+
+.navbar-toggle {
+  background-color: white;
+  text-transform: uppercase;
+  color: white;
+  font-size: 12px;
+
+}
+.navbar-toggle:hover,
+.navbar-toggle:focus {
+  /*background-color: #505e6d !important;*/
+}
+
+.icon-bar{
+    background-color: #505e6d !important;
+}
+
+.dropdown a{
+    color: white;
+    margin-top:-2px;
+}
+.dropdown a:hover,
+.dropdown a:focus,
+.dropdown a:active{
+    color: #505e6d;
+    background-color: white; 
+    margin-top:-2px;
+}
+.dropdown-menu{
+    /*margin-left: 10vw;*/
+    text-align: center;
+    /*width: auto;*/
+    height: auto;
+    color:#0096bc;
+}
+.dropdown-menu li{
+    background-color: #505e6d 
+    color: white !important;
+}
+.dropdown-menu > li > a{
+    background-color: #505e6d; 
+    color: white !important;
+}
+.dropdown-menu > li > a:hover{
+    background-color: #505e6d; 
+    color: white !important;
+}
