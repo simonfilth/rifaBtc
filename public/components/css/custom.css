@@ -1,5 +1,6 @@
 body{
-    background-color: #a7b3bc; 
+    background-color: #a7b3bc;
+    margin-top: 55px;
 }
 .huge {
     font-size: 40px;
@@ -62,7 +63,7 @@ body{
 .navbar-principal{
     background-color: #505e6d;
     border-color: #e7e7e7;
-    height: 50px;
+    height: 55px;
 }
 
 .navbar-principal ul{
@@ -114,7 +115,6 @@ body{
 
 .dropdown a{
     color: white;
-    margin-top:-2px;
 }
 .dropdown a:hover,
 .dropdown a:focus,
@@ -125,7 +125,7 @@ body{
 }
 .dropdown-menu{
     /*margin-left: 10vw;*/
-    text-align: center;
+    text-align: left;
     /*width: auto;*/
     height: auto;
     color:#0096bc;
@@ -141,4 +141,8 @@ body{
 .dropdown-menu > li > a:hover{
     background-color: #505e6d; 
     color: white !important;
+}
+
+.color-blanco{
+    color:white;
 }

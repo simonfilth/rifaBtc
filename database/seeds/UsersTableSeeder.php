@@ -15,8 +15,8 @@ class UsersTableSeeder extends Seeder
         \DB::table('users')->insert(array (
 	        'name' => "Simón José",
 	        'apellido' => "Aguilera Gómez",
-	        'email' => "developer@simonaguilera.com.ve",
-	        'password' => \Hash::make('17263930'),
+	        'email' => "admin@admin.com",
+	        'password' => \Hash::make('admin'),
 	        'remember_token' => str_random(10),
 	        'tipo_usuario' => 'Administrador',
 	        'id_wallet' => 'wallet',
