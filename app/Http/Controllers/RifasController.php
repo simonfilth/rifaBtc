@@ -7,6 +7,8 @@ use App\Http\Requests\RifasRequest;
 use App\modelos\Rifa;
 use App\modelos\RifaUsuario;
 use Carbon\Carbon;
+use App\User;
+use Auth;
 
 class RifasController extends Controller
 {
@@ -97,6 +99,7 @@ class RifasController extends Controller
 
     public function unirseSorteo()
     {
+        
         $rifa = Rifa::all()->last();
         
         if ($rifa==null) {

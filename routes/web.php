@@ -31,7 +31,7 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('mostrar-usuarios', 'AdminController@mostrarUsuarios');
 		Route::get('agregar-usuario', 'AdminController@agregarUsuario');
 		Route::post('guardar-usuario', 'AdminController@guardarUsuario');
-		Route::get('editar-usuario/{id}', 'AdminController@editarUsuario');
+		
 		Route::patch('actualizar-usuario/{id}', 'AdminController@actualizarUsuario');
 		Route::get('eliminar-usuario/{id}', 'AdminController@eliminarUsuario');
 
@@ -48,5 +48,8 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('ver-usuario/{id}', 'AdminController@verUsuario');
 		Route::get('unirse-a-sorteo', 'RifasController@unirseSorteo');
 		Route::post('guardar-union-sorteo/{id}', 'RifasController@guardarUnionSorteo');
+		Route::get('panel-cliente', 'ClientesController@panelCliente');
+		Route::get('editar-usuario/{id}', 'AdminController@editarUsuario');
+		Route::patch('guardar-foto-usuario/{id}', 'AdminController@guardarFotoUsuario');
 	});
 });

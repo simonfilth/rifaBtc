@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\User;
+use App\modelos\OtroDatoUsuario;
 use Carbon\Carbon;
+use Auth;
 
 class AdminController extends Controller
 {
@@ -60,7 +62,10 @@ class AdminController extends Controller
 
     public function editarUsuario($id)
     {
-        $usuario = User::findOrFail($id);
+        $usuario = User::where('users.id',$id)
+        ->join('otros_datos_usuario as ODU','ODU.usuario_id','users.id')
+        ->first();
+        // dd($usuario);
         $tipo_usuario = array('Administrador','Cliente');
         return \View::make('admin.editar-usuario',compact('usuario','tipo_usuario'));
     }
@@ -93,6 +98,28 @@ class AdminController extends Controller
         $usuario->delete();
     	
     	return \Redirect::back()->with("message",'Usuario eliminado exitósamente');
+    }
+
+    public function guardarFotoUsuario(Request $request,$id)
+    {
+        $foto_usuario = OtroDatoUsuario::where('usuario_id',$id)->first();
+        
+        if($request->file('foto_perfil')!=null){
+            \Storage::disk('local')->delete($id.'/foto_perfil/'.$foto_usuario->foto_perfil);
+
+            $foto_usuario->foto_perfil=$request->file('foto_perfil')->getClientOriginalName();
+            $file = $request->file('foto_perfil');
+            $nombre = $id.'/foto_perfil/'.$file->getClientOriginalName();
+            
+            \Storage::disk('local')->put($nombre,  \File::get($file));
+        } 
+        $foto_usuario->updated_at = Carbon::now()->format('Y-m-d H:i:s');
+        $foto_usuario->save();
+
+        if(Auth::user()->tipo_usuario=='Cliente'){
+            return \Redirect::back()->with("message",'Foto de perfil agregada exitósamente');
+        }
+        return redirect()->action('AdminController@mostrarUsuarios')->with("message",'Usuario agregado exitósamente');
     }
 
 

@@ -35,11 +35,19 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
+                            @if(Auth::user()->tipo_usuario=='Administrador')
                             <li>
                                 <a href="{{ url('dashboard') }}">
                                     <i class="fa fa-dashboard"></i> Dashboard
                                 </a>
                             </li>
+                            @elseif(Auth::user()->tipo_usuario=='Cliente')
+                            <li>
+                                <a href="{{ url('panel-cliente') }}">
+                                    <i class="fa fa-dashboard"></i> Panel
+                                </a>
+                            </li>
+                            @endif
                             <li>
                                 <a href="{{ url('ver-usuario',Auth::user()->id) }}">
                                     <i class="fa fa-user"></i> Mi Perfil

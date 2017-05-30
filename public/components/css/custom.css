@@ -1,5 +1,5 @@
 body{
-    background-color: #a7b3bc;
+    /*background-color: #a7b3bc;*/
     margin-top: 55px;
 }
 .huge {
@@ -145,4 +145,8 @@ body{
 
 .color-blanco{
     color:white;
+}
+
+.img-profile{
+    width: 65%;
 }
