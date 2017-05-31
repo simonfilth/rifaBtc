@@ -32,7 +32,37 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="panel">                              
-                <div class="panel-body">               
+                <div class="panel-body">
+                    <div class="panel-heading">              
+                        <h2>Mis rifas</h2>
+                    </div>
+                    @forelse($sorteos as $sorteo)
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <p>{{$sorteo->id_transferencia}}</p>
+                            </div>
+                            <div class="col-lg-6">
+                            @if($sorteo->confirmar_pago==0)
+                                <p class="text-danger">Pago no confirmado</p>
+                            @elseif($sorteo->confirmar_pago==1)
+                                <p class="text-success"><i class="fa fa-check"></i> Pago confirmado</p>
+                            @endif
+                            </div>
+                        </div>
+                    @empty
+                        <p>No se ha unido al sorteo de esta rifa</p>
+                    @endforelse
+                </div>
+            </div>
+        </div>    
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="panel">                              
+                <div class="panel-body">
+                    <div class="panel-heading">              
+                        <h2>Agregar transferencia</h2>
+                    </div>              
                     @include('errors.errors')
 
                     {!! Form::open(['url' =>['guardar-union-sorteo',$rifa->id], 'method' => 'POST']) !!}
@@ -42,7 +72,7 @@
 						    {!! Form::text('id_transferencia', null, ['class' => 'form-control']) !!}
 						</div>
                         <div class="form-group">
-                            {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
+                            {!! Form::submit('Agregar', ['class' => 'btn btn-primary']) !!}
                         </div>
 
                     {!! Form::close() !!}

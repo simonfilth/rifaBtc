@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\RifasRequest;
+use App\Http\Requests\TransferenciasRequest;
 use App\modelos\Rifa;
 use App\modelos\RifaUsuario;
 use Carbon\Carbon;
@@ -105,10 +106,15 @@ class RifasController extends Controller
         if ($rifa==null) {
             return redirect()->action('RifasController@agregarRifa')->with('message','Agregue una rifa primero');
         }
-        return \View::make('rifas.unirse-a-sorteo',compact('rifa'));
+
+        $sorteos = RifaUsuario::where([['rifas_usuarios.rifa_id',$rifa->id],['rifas_usuarios.usuario_id',Auth::user()->id]])
+            ->join('rifas','rifas.id','rifas_usuarios.rifa_id')
+            ->get();
+        // dd($sorteos);
+        return \View::make('rifas.unirse-a-sorteo',compact('rifa','sorteos'));
     }
 
-    public function guardarUnionSorteo(Request $request,$id)
+    public function guardarUnionSorteo(TransferenciasRequest $request,$id)
     {
 
     	$union_sorteo = new RifaUsuario;
@@ -119,7 +125,37 @@ class RifasController extends Controller
         $union_sorteo->updated_at = Carbon::now()->format('Y-m-d H:i:s');
         $union_sorteo->save();
 
-    	return \View::make('rifas.unirse-a-sorteo',compact('rifa'));
+    	return \Redirect::back()->with("message",'Transferencia agregada exitósamente');
+    }
+
+    public function mostrarParticipantes($id=null)
+    {
+        // dd($id);
+        if($id!=null){
+            $rifas_usuarios = RifaUsuario::where('rifas_usuarios.rifa_id',$id)
+            ->join('users','users.id','rifas_usuarios.usuario_id')
+            ->join('rifas','rifas.id','rifas_usuarios.rifa_id')
+            ->paginate(15);
+            $rifa = Rifa::find($id);
+        }
+        else{
+            $rifa = Rifa::all()->last();
+            $rifas_usuarios = RifaUsuario::where('rifas_usuarios.rifa_id',$rifa->id)
+            ->join('users','users.id','rifas_usuarios.usuario_id')
+            ->join('rifas','rifas.id','rifas_usuarios.rifa_id')
+            ->paginate(15);
+        }
+        
+        return \View::make('rifas.mostrar-participantes',compact('rifas_usuarios','rifa'));
+    }
+
+    public function confirmarPago($id)
+    {
+        $rifas_usuarios = RifaUsuario::where('id_transferencia',$id)->first();
+        $rifas_usuarios->confirmar_pago = 1;
+        $rifas_usuarios->save();
+        
+        return \Redirect::back()->with("message",'Pago confirmado exitósamente');
     }
 
 }

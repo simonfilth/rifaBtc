@@ -38,6 +38,10 @@
                     <a href="{{url('unirse-a-sorteo')}}"><i class="fa fa-cube fa-lg"></i> Unirse a Sorteo</a> 
                   </li>
 
+                  <li  data-toggle="collapse" data-target="#usuarios" class="collapsed">
+                    <a href="{{url('mostrar-participantes')}}"><i class="fa fa-users fa-lg"></i> Participantes</a> 
+                  </li>
+
                   <li data-toggle="collapse" data-target="#citas" class="collapsed">
                     <a href="#"><i class="fa fa-calendar fa-lg"></i> Calendario</a>
                   </li>

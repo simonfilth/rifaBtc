@@ -42,6 +42,7 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('editar-rifa/{id}', 'RifasController@editarRifa');
 		Route::patch('actualizar-rifa/{id}', 'RifasController@actualizarRifa');
 		Route::get('eliminar-rifa/{id}', 'RifasController@eliminarRifa');
+		Route::get('confirmar-pago/{id}', 'RifasController@confirmarPago');
 	});
 
 	Route::group(['middleware' => 'roles','roles' => ['Administrador', 'Cliente']], function () {
@@ -51,5 +52,6 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('panel-cliente', 'ClientesController@panelCliente');
 		Route::get('editar-usuario/{id}', 'AdminController@editarUsuario');
 		Route::patch('guardar-foto-usuario/{id}', 'AdminController@guardarFotoUsuario');
+		Route::get('mostrar-participantes/{id?}', 'RifasController@mostrarParticipantes');
 	});
 });
