@@ -1,3 +1,11 @@
+@if(Auth::check())
+@php
+  $perfil = App\User::join('otros_datos_usuario','otros_datos_usuario.usuario_id','users.id')
+  ->where('otros_datos_usuario.usuario_id',Auth::user()->id)
+  ->select('otros_datos_usuario.foto_perfil')
+  ->first();
+@endphp
+@endif
 <nav class="navbar navbar-principal navbar-fixed-top" id="mainNav">
     <div class="container">
         <div class="navbar-header">
@@ -31,6 +39,9 @@
                 @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            @if($perfil!=null)
+                              {!! Html::image('storage/'.Auth::user()->id.'/foto_perfil/'.$perfil->foto_perfil, 'Imagen', array('class' => 'img-nav img-circle')) !!}
+                            @endif
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
 

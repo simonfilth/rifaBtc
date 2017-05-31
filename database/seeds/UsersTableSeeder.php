@@ -12,7 +12,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        /*\DB::table('users')->insert(array (
+        \DB::table('users')->insert(array (
 	        'name' => "Simón José",
 	        'apellido' => "Aguilera Gómez",
 	        'email' => "admin@admin.com",
@@ -22,7 +22,7 @@ class UsersTableSeeder extends Seeder
 	        'id_wallet' => 'wallet',
 	        'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
 	        'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
-		));*/
+		));
 
 		\DB::table('otros_datos_usuario')->insert(array (
 	        'usuario_id' => 1,
