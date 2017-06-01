@@ -62,12 +62,16 @@ class AdminController extends Controller
 
     public function editarUsuario($id)
     {
-        $usuario = User::where('users.id',$id)
-        ->join('otros_datos_usuario as ODU','ODU.usuario_id','users.id')
-        ->first();
-        // dd($usuario);
-        $tipo_usuario = array('Administrador','Cliente');
-        return \View::make('admin.editar-usuario',compact('usuario','tipo_usuario'));
+        if(Auth::user()->id == $id or Auth::user()->tipo_usuario == 'Administrador'){
+            $usuario = User::where('users.id',$id)
+            ->join('otros_datos_usuario as ODU','ODU.usuario_id','users.id')
+            ->first();
+            // dd($usuario);
+            $tipo_usuario = array('Administrador','Cliente');
+            return \View::make('admin.editar-usuario',compact('usuario','tipo_usuario'));
+        }
+        return redirect()->action('HomeController@index');
+        
     }
 
     public function actualizarUsuario(UpdateUserRequest $request,$id)

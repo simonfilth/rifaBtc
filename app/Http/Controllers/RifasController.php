@@ -93,6 +93,9 @@ class RifasController extends Controller
     public function eliminarRifa($id)
     {
         $rifa = Rifa::findOrFail($id);
+
+        $rifas_usuarios = RifaUsuario::where('rifa_id',$rifa->id)->delete();
+
         $rifa->delete();
         
         return \Redirect::back()->with("message",'Rifa eliminada exitósamente');

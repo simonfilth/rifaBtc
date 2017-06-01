@@ -34,8 +34,8 @@
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
                 @if (Auth::guest())
-                    <li><a class="color-blanco" href="{{ route('login') }}">Iniciar Sesión</a></li>
-                    <li><a class="color-blanco" href="{{ route('register') }}">Registrarse</a></li>
+                    <li><a class="color-blanco" href="{{ route('login') }}">{{trans('mensajes.login')}}</a></li>
+                    <li><a class="color-blanco" href="{{ route('register') }}">{{trans('mensajes.register')}}</a></li>
                 @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -76,6 +76,20 @@
                                 </form>
                             </li>
                         </ul>
+                    </li>
+                @endif
+
+                @if(session()->get('lang')=='en')
+                    <li>
+                    <a href="{{ url('lang', ['es']) }}">En
+                        <!-- {!! Html::image('assets/imagenes/idioma-icons/eeuu-icon.png', 'Imagen', array('class' => 'img-flag')) !!} -->
+                    </a>
+                    </li>
+                @else
+                    <li>
+                    <a href="{{ url('lang', ['en']) }}">Es
+                        <!-- {!! Html::image('assets/imagenes/idioma-icons/ecuador-icon.png', 'Imagen', array('class' => 'img-flag')) !!} -->
+                    </a>
                     </li>
                 @endif
             </ul>

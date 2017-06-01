@@ -25,7 +25,9 @@
     {!! Form::password('password', ['class' => 'form-control']) !!}
 </div>
 
+@if(Auth::user()->tipo_usuario == 'Administrador')
 <div class="form-group">
     {!! Form::label('tipo_usuario', 'Tipo de Usuario:') !!}
     {!!Form::select('tipo_usuario', $tipo_usuario, null, ['class' => 'form-control'])!!}
 </div>
+@endif

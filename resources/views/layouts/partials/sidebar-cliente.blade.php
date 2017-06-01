@@ -22,13 +22,8 @@
               <ul id="menu-content" class="menu-content collapse out">
 
                   <li  data-toggle="collapse" data-target="#usuarios" class="collapsed">
-                    <a href="{{url('/')}}"><i class="fa fa-home fa-lg"></i> Inicio</a> 
+                    <a href="{{url('panel-cliente')}}"><i class="fa fa-home fa-lg"></i> Inicio</a> 
                   </li>
-
-                  <li  data-toggle="collapse" data-target="#usuarios" class="collapsed">
-                    <a href="{{url('panel-cliente')}}"><i class="fa fa-dashboard fa-lg"></i> Panel</a> 
-                  </li>
-
 
                   <li  data-toggle="collapse" data-target="#usuarios" class="collapsed">
                     <a href="{{url('/')}}"><i class="fa fa-gift fa-lg"></i> Premios</a> 
