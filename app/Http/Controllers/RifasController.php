@@ -102,8 +102,11 @@ class RifasController extends Controller
     {
         
         $rifa = Rifa::all()->last();
-        
+        // dd($rifa);
         if ($rifa==null) {
+            if(Auth::user()->tipo_usuario=='Cliente'){
+                return redirect()->action('ClientesController@panelCliente')->with('message','No hay sorteos en este momento');
+            }
             return redirect()->action('RifasController@agregarRifa')->with('message','Agregue una rifa primero');
         }
 
@@ -140,6 +143,11 @@ class RifasController extends Controller
         }
         else{
             $rifa = Rifa::all()->last();
+            if ($rifa==null) {
+                if(Auth::user()->tipo_usuario=='Cliente'){
+                    return redirect()->action('ClientesController@panelCliente')->with('message','No hay sorteos en este momento');
+                }
+            }
             $rifas_usuarios = RifaUsuario::where('rifas_usuarios.rifa_id',$rifa->id)
             ->join('users','users.id','rifas_usuarios.usuario_id')
             ->join('rifas','rifas.id','rifas_usuarios.rifa_id')
