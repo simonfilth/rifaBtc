@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\modelos\OtroDatoUsuario;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -27,13 +30,26 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    // protected $redirectTo = '/home';
+    protected function registered(Request $request)
+    {
+        // dd($request->all());
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+        $usuario=User::all()->last();
+       
+        $contents = \Storage::get('default-profile-pic.png');
+        \Storage::put($usuario->id.'/foto_perfil/default-profile-pic.png', $contents);
+        $foto_usuario=new OtroDatoUsuario;     
+        $foto_usuario->usuario_id = $usuario->id;
+        $foto_usuario->created_at = Carbon::now()->format('Y-m-d H:i:s');
+        $foto_usuario->updated_at = Carbon::now()->format('Y-m-d H:i:s'); 
+        $foto_usuario->foto_perfil="default-profile-pic.png";
+        $foto_usuario->save(); 
+
+        return redirect()->action('HomeController@index');
+    }
+
+
     public function __construct()
     {
         $this->middleware('guest');

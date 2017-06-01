@@ -1,6 +1,6 @@
 body{
-    background-color: #a7b3bc;
-    margin-top: 55px;
+    /*background-color: #a7b3bc;*/
+    margin-top: 60px;
 }
 .huge {
     font-size: 40px;
@@ -63,7 +63,7 @@ body{
 .navbar-principal{
     background-color: #505e6d;
     border-color: #e7e7e7;
-    height: 55px;
+    height: 60px;
 }
 
 .navbar-principal ul{
@@ -145,4 +145,13 @@ body{
 
 .color-blanco{
     color:white;
+}
+
+.img-profile{
+    width: 150px;
+    height: 150px;
+}
+.img-nav{
+    width: 29px;
+    height: 29px;
 }

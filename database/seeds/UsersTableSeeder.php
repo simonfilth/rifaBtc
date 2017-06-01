@@ -32,8 +32,20 @@ class UsersTableSeeder extends Seeder
 	        'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
 		));
 
+<<<<<<< HEAD
 	/*	$contents = \Storage::get('default-profile-pic.png');
         \Storage::put('1/foto_perfil/default-profile-pic.png', $contents);*/
+=======
+		\DB::table('otros_datos_usuario')->insert(array (
+	        'usuario_id' => 1,
+	        'foto_perfil' => "default-profile-pic.png",
+	        'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+	        'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+		));
+
+		$contents = \Storage::get('default-profile-pic.png');
+        \Storage::put('1/foto_perfil/default-profile-pic.png', $contents);
+>>>>>>> cbe7a20ee6076ad8323a05e157bc6717c7f82234
     }
 }
 
