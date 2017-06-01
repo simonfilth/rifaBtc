@@ -32,7 +32,7 @@ class UsersTableSeeder extends Seeder
 	        'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
 		));
 
-<<<<<<< HEAD
+<<< HEAD
 	/*	$contents = \Storage::get('default-profile-pic.png');
         \Storage::put('1/foto_perfil/default-profile-pic.png', $contents);*/
 =======

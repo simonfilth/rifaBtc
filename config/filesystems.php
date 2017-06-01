@@ -43,15 +43,10 @@ return [
 
     'disks' => [
 
-        'local' => [
-            'driver' => 'local',
-            'root'   => public_path().'/storage',
-<<<<<<< HEAD
-=======
-            // 'root' => storage_path('app'),
->>>>>>> cbe7a20ee6076ad8323a05e157bc6717c7f82234
-        ],
-
+          'local' => [
+              'driver' => 'local',
+              'root'   => public_path().'/storage',
+          ],
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
