@@ -155,3 +155,11 @@ body{
     width: 29px;
     height: 29px;
 }
+
+.href-panel{
+    color:white;
+    cursor: pointer;
+}
+.href-panel:hover{
+    color:white;
+}

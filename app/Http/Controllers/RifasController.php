@@ -10,6 +10,7 @@ use App\modelos\RifaUsuario;
 use Carbon\Carbon;
 use App\User;
 use Auth;
+use App\modelos\SorteoEnCurso;
 
 class RifasController extends Controller
 {
@@ -167,6 +168,27 @@ class RifasController extends Controller
         $rifas_usuarios->save();
         
         return \Redirect::back()->with("message",'Pago confirmado exitósamente');
+    }
+
+    public function agregarSorteo()
+    {
+        $rifas = Rifa::pluck('fecha_rifa','id')->toArray();
+        
+        return \View::make('rifas.agregar-sorteo',compact('rifas'));
+    }
+    public function guardarSorteo(Request $request)
+    {
+        $sorteo_en_curso = SorteoEnCurso::first();
+
+        if($sorteo_en_curso==null){
+            $sorteo_en_curso= new SorteoEnCurso;
+            $sorteo_en_curso->created_at = Carbon::now()->format('Y-m-d H:i:s');
+        }
+        $sorteo_en_curso->rifa_id = $request->rifa_id;
+        $sorteo_en_curso->updated_at = Carbon::now()->format('Y-m-d H:i:s');
+        $sorteo_en_curso->save();
+        
+        return \Redirect::back()->with("message",'Sorteo agregado exitósamente');
     }
 
 }

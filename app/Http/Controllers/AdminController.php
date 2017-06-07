@@ -7,6 +7,8 @@ use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\User;
 use App\modelos\OtroDatoUsuario;
+use App\modelos\Rifa;
+use App\modelos\SorteoEnCurso;
 use Carbon\Carbon;
 use Auth;
 
@@ -14,7 +16,15 @@ class AdminController extends Controller
 {
     public function dashboard(Request $request)
     {
-		return \View::make('admin.dashboard');
+        $sorteos_vigentes = SorteoEnCurso::first();
+        if($sorteos_vigentes==null){
+            return \Redirect::back()->with("message",'No hay sorteos');
+        }
+        $participantes = User::join('rifas_usuarios as RU','RU.usuario_id','users.id')
+            ->join('rifas','rifas.id','RU.rifa_id')
+            ->where('RU.rifa_id',$sorteos_vigentes->rifa_id)->get();
+
+		return \View::make('admin.dashboard',compact('participantes'));
     }
 
     public function mostrarUsuarios(Request $request)

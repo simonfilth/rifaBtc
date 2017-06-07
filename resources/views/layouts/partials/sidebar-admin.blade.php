@@ -37,6 +37,10 @@
                   </li>
 
                   <li  data-toggle="collapse" data-target="#usuarios" class="collapsed">
+                    <a href="{{url('agregar-sorteo')}}"><i class="fa fa-plus fa-lg"></i> {{trans('mensajes.agregar-sorteo')}}</a> 
+                  </li>
+
+                  <li  data-toggle="collapse" data-target="#usuarios" class="collapsed">
                     <a href="{{url('/')}}"><i class="fa fa-gift fa-lg"></i> Premios</a> 
                   </li>
 

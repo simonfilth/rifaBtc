@@ -50,6 +50,8 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::patch('actualizar-rifa/{id}', 'RifasController@actualizarRifa');
 		Route::get('eliminar-rifa/{id}', 'RifasController@eliminarRifa');
 		Route::get('confirmar-pago/{id}', 'RifasController@confirmarPago');
+		Route::get('agregar-sorteo', 'RifasController@agregarSorteo');
+		Route::post('guardar-sorteo', 'RifasController@guardarSorteo');
 	});
 
 	Route::group(['middleware' => 'roles','roles' => ['Administrador', 'Cliente']], function () {
