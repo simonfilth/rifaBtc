@@ -23,8 +23,19 @@ class AdminController extends Controller
         $participantes = User::join('rifas_usuarios as RU','RU.usuario_id','users.id')
             ->join('rifas','rifas.id','RU.rifa_id')
             ->where('RU.rifa_id',$sorteos_vigentes->rifa_id)->get();
+        $dataParticipantes = $participantes->toArray();
+        $dataParticipantes = json_encode($dataParticipantes);
 
-		return \View::make('admin.dashboard',compact('participantes'));
+        $ganadores = Rifa::join('rifas_usuarios as RU','RU.rifa_id','rifas.id')
+            ->join('users as U','U.id','RU.usuario_id')
+            ->join('premios_primero as PP','PP.usuario_id','U.id')
+            ->join('premios_segundo as PS','PS.usuario_id','U.id')
+            ->join('premios_tercero as PT','PT.usuario_id','U.id')
+            ->get();
+        $dataGanadores = $ganadores->toArray();
+        $dataGanadores = json_encode($dataGanadores);
+
+		return \View::make('admin.dashboard',compact('participantes','ganadores','dataParticipantes','dataGanadores'));
     }
 
     public function mostrarUsuarios(Request $request)

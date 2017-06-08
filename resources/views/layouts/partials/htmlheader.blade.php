@@ -16,6 +16,7 @@
     {!! Html::style('components/css/font-awesome.min.css') !!}
     {!! Html::style('components/css/simple-sidebar.css') !!}
     {!! Html::style('components/css/custom.css') !!}
+    {!! Html::style('components/css/table-responsive-sortable.css') !!}
     {!! Html::style('components/jquery-ui/jquery-ui.min.css') !!}
     {!! Html::script('components/js/vue.js') !!}
 </head>

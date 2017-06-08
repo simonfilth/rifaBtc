@@ -5,8 +5,8 @@
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">
-                Usuario
-                <small>Editar</small>
+                {{trans('mensajes.usuario')}}
+                <small>{{trans('mensajes.edit')}}</small>
             </h1>
             @include('errors.errors')
             
@@ -29,13 +29,13 @@
                     {!! Form::model($usuario, ['url' => ['guardar-foto-usuario', $usuario->usuario_id], 'method' => 'patch','files' => true]) !!}
 
                         <div class="form-group">
-                            {!! Form::label('foto_perfil', 'Foto de Perfil:') !!}
+                            {!! Form::label('foto_perfil', {{trans('mensajes.foto-perfil')}}.':') !!}
                             {!! Form::file('foto_perfil') !!}
                         </div>
 
                         
                         <div class="form-group">
-                            {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
+                            {!! Form::submit('{{trans('mensajes.save')}}', ['class' => 'btn btn-primary']) !!}
                         </div>
 
                     {!! Form::close() !!}
@@ -53,7 +53,7 @@
                         @include('admin.formulario')
                         
                         <div class="form-group">
-                            {!! Form::submit('Actualizar', ['class' => 'btn btn-primary']) !!}
+                            {!! Form::submit(trans('mensajes.update'), ['class' => 'btn btn-primary']) !!}
                         </div>
 
                     {!! Form::close() !!}

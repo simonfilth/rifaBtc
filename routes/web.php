@@ -35,7 +35,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::group(['middleware' => 'roles','roles' => 'Administrador'], function () {
 		
-		Route::get('dashboard', 'AdminController@dashboard');
+		
 		Route::get('mostrar-usuarios', 'AdminController@mostrarUsuarios');
 		Route::get('agregar-usuario', 'AdminController@agregarUsuario');
 		Route::post('guardar-usuario', 'AdminController@guardarUsuario');
@@ -63,6 +63,7 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::patch('actualizar-usuario/{id}', 'AdminController@actualizarUsuario');
 		Route::patch('guardar-foto-usuario/{id}', 'AdminController@guardarFotoUsuario');
 		Route::get('mostrar-participantes/{id?}', 'RifasController@mostrarParticipantes');
+		Route::get('dashboard', 'AdminController@dashboard');
 	});
 });
 

@@ -1,0 +1,65 @@
+table.sortable thead {
+    cursor: pointer;
+}
+
+table#table-responsive { 
+  margin: 0 auto;
+  border-collapse: collapse;
+
+  /*font-family: Agenda-Light, sans-serif;*/
+  font-weight: 100; 
+  /*background: #333;*/
+  background: #0096bc;
+   color: #fff;
+  text-rendering: optimizeLegibility;
+  border-radius: 5px; 
+
+}
+table#table-responsive caption { 
+  font-size: 2rem; color: #444;
+  margin: 1rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center left, center right; 
+}
+table#table-responsive thead th { font-weight: 600; }
+table#table-responsive thead th, table#table-responsive tbody td { 
+  padding: .8rem; 
+  font-size: 1.4rem;
+  /*font-family: "Century Gothic" !important;*/
+}
+table#table-responsive tbody td { 
+  padding: .8rem; font-size: 1.4rem;
+  color: #444; background: #eee; 
+}
+table#table-responsive tbody tr:not(:last-child) { 
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;  
+}
+
+@media screen and (max-width: 950px) {
+	table#table-responsive{ 
+		text-align: center; 
+	}
+	table#table-responsive caption { 
+		background-image: none; 
+	}
+	table#table-responsive thead { 
+		display: none; 
+	}
+	table#table-responsive tbody td { 
+		display: block; padding: .6rem; 
+	}
+	table#table-responsive tbody tr td:first-child { 
+		background: #0096bc;
+		color: #fff; 
+	}
+	table#table-responsive tbody td:before { 
+		content: attr(data-th); 
+		font-weight: bold;
+		display: inline-block;
+		/*width: 6rem;  */
+		margin-right: 20px;
+	}
+
+}

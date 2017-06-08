@@ -4,7 +4,7 @@
 <div class="col-sm-8">
 	<div class="row">
         <div class="col-lg-12">
-        	<h1 class="page-header">Usuarios</h1>
+        	<h1 class="page-header">{{trans('mensajes.usuarios')}}</h1>
         	
 
             
@@ -30,7 +30,7 @@
                     <div class="row">
                         <div class="col-sm-9">
                             <div class="input-group">
-                              <input type="text" name="buscar" class="form-control" placeholder="Buscar usuario...">
+                              <input type="text" name="buscar" class="form-control" placeholder="{{trans('mensajes.buscar-usuario')}}">
                               <span class="input-group-btn">
                                 <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
                               </span>
@@ -38,7 +38,7 @@
                             <br> 
                         </div>
                         <div class="col-sm-3">
-                            <a href="{{url('agregar-usuario')}}" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Nuevo Usuario</a>
+                            <a href="{{url('agregar-usuario')}}" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> {{trans('mensajes.nuevo-usuario')}}</a>
                         </div>
  
                     </div>                  
@@ -47,10 +47,10 @@
                 
                 <table id="table-responsive" class="table table-condensed table-striped sortable ">
                     <thead>
-                        <th>Nombre</th>
-                        <th>Email</th>
-                        <th>Wallet ID</th>
-                        <th>Acción</th>
+                        <th>{{trans('mensajes.nombre')}}</th>
+                        <th>{{trans('mensajes.email')}}</th>
+                        <th>{{trans('mensajes.id-wallet')}}</th>
+                        <th>{{trans('mensajes.accion')}}</th>
                     </thead>
                     <tbody>
                         @forelse($usuarios as $usuario)
@@ -63,12 +63,12 @@
                                 <a  class="btn btn-primary btn-xs" href="{{ url('ver-usuario', $usuario->id)}}" ><i class="fa fa-eye"></i></a>
                                 <a class="btn btn-primary btn-xs" href="{{ url('editar-usuario', $usuario->id)}}"><i class="fa fa-edit"></i></a>
                                 @if($usuario->tipo_usuario=='Cliente')
-                                <a class="btn btn-primary btn-xs" href="{{ url('eliminar-usuario', $usuario->id)}}" onclick="return confirm('¿Seguro que desea eliminar este usuario?')"><i class="fa fa-trash"></i></a>
+                                <a class="btn btn-primary btn-xs" href="{{ url('eliminar-usuario', $usuario->id)}}" onclick="return confirm('{{trans('mensajes.confirmar-eliminacion')}}')"><i class="fa fa-trash"></i></a>
                                 @endif
                             </td>
                         </tr>
                         @empty
-                        	<tr><td align="center" colspan="4">No se encontraron resultados</td></tr>
+                        	<tr><td align="center" colspan="4">{{trans('mensajes.no-encontraron-resultados')}}</td></tr>
                         @endforelse
                     </tbody>
                 </table>

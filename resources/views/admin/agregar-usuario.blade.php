@@ -5,8 +5,8 @@
 	<div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">
-                Usuario
-                <small>Agregar</small>
+                {{trans('mensajes.usuario')}}
+                <small>{{trans('mensajes.add')}}</small>
             </h1>
             <ol class="breadcrumb">
                 <li class="active">
@@ -25,7 +25,7 @@
 
                         @include('admin.formulario')
                         <div class="form-group">
-                            {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
+                            {!! Form::submit(trans('mensajes.save'), ['class' => 'btn btn-primary']) !!}
                         </div>
 
                     {!! Form::close() !!}

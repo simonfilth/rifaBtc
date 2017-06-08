@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">
-                Usuario
+                {{trans('mensajes.usuario')}}
                 <small>{{$usuario->name}} {{$usuario->apellido}}</small>
             </h1>
             <!-- <ol class="breadcrumb">
@@ -27,7 +27,7 @@
                             <p><i class="fa fa-users"></i> {{$usuario->tipo_usuario}}</p>
                         </div>
                         <div class="col-sm-6">
-                            <a class="btn btn-primary" href="{{ url('editar-usuario', $usuario->id)}}"><i class="fa fa-edit"></i> Editar</a>
+                            <a class="btn btn-primary" href="{{ url('editar-usuario', $usuario->id)}}"><i class="fa fa-edit"></i> {{trans('mensajes.edit')}}</a>
                         </div>
                     </div>
                     

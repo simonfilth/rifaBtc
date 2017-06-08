@@ -49,26 +49,26 @@
                             @if(Auth::user()->tipo_usuario=='Administrador')
                             <li>
                                 <a href="{{ url('dashboard') }}">
-                                    <i class="fa fa-dashboard"></i> Dashboard
+                                    <i class="fa fa-dashboard"></i> {{trans('mensajes.dashboard')}}
                                 </a>
                             </li>
                             @elseif(Auth::user()->tipo_usuario=='Cliente')
                             <li>
-                                <a href="{{ url('panel-cliente') }}">
-                                    <i class="fa fa-dashboard"></i> Panel
+                                <a href="{{ url('dashboard') }}">
+                                    <i class="fa fa-dashboard"></i> {{trans('mensajes.home')}}
                                 </a>
                             </li>
                             @endif
                             <li>
                                 <a href="{{ url('ver-usuario',Auth::user()->id) }}">
-                                    <i class="fa fa-user"></i> Mi Perfil
+                                    <i class="fa fa-user"></i> {{trans('mensajes.mi-perfil')}}
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
-                                    <i class="fa fa-sign-out"></i> Cerrar Sesión
+                                    <i class="fa fa-sign-out"></i> {{trans('mensajes.logout')}}
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

@@ -163,6 +163,7 @@ class RifasController extends Controller
 
     public function confirmarPago($id)
     {
+
         $rifas_usuarios = RifaUsuario::where('id_transferencia',$id)->first();
         $rifas_usuarios->confirmar_pago = 1;
         $rifas_usuarios->save();
