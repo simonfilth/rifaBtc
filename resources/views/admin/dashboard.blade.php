@@ -167,6 +167,17 @@
                         <td v-else-if="participante.confirmar_pago == 1"><p class="text-success"><i class="fa fa-check"></i>{{trans('mensajes.pago-confirmado')}}</p></td>
                     @endif
                     </tr>
+                    <div v-if="participantes.length == 0">
+                        <tr>
+                        @if(Auth::user()->tipo_usuario == 'Administrador')
+                            <td colspan="4" align="center">
+                        @else
+                            <td colspan="2" align="center">
+                        @endif
+                                {{trans('mensajes.todavia-no-hay-ganadores')}}
+                            </td>
+                        </tr>
+                    </div>
                 </tbody>
             </table>
         </div>
