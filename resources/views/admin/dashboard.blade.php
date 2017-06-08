@@ -174,7 +174,7 @@
                         @else
                             <td colspan="2" align="center">
                         @endif
-                                {{trans('mensajes.todavia-no-hay-ganadores')}}
+                                {{trans('mensajes.todavia-no-hay-participantes')}}
                             </td>
                         </tr>
                     </div>

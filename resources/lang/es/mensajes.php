@@ -28,6 +28,7 @@ return [
     'pago-confirmado' => 'Pago confirmado',
     'fecha-sorteo' => 'Fecha de sorteo',
     'todavia-no-hay-ganadores' => 'Todavía no hay ganadores',
+    'todavia-no-hay-participantes' => 'Todavía no hay participantes',
     'mi-perfil' => 'Mi perfil',
     'logout' => 'Cerrar Sesión',
     'usuarios' => 'Usuarios',

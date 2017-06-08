@@ -28,6 +28,7 @@ return [
     'pago-confirmado' => 'Payment confirmed',
     'fecha-sorteo' => 'Date draw',
     'todavia-no-hay-ganadores' => 'There are still no winners',
+    'todavia-no-hay-participantes' => 'There are still no participants',
     'mi-perfil' => 'My profile',
     'logout' => 'Logout',
     'usuarios' => 'Users',
