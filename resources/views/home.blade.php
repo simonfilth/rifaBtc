@@ -22,11 +22,11 @@ Home
 	<!-- Icomoon Icon Fonts-->
 	{!! Html::style('cryptosorteo/css/icomoon.css') !!}
 	<!-- Bootstrap  -->
-	{!! Html::style('components/bootstrap/css/bootstrap.min.css') !!}
+	{!! Html::style('cryptosorteo/css/bootstrap.css') !!}
 	<!-- Theme style  -->
 	{!! Html::style('cryptosorteo/css/style.css') !!}
 	{!! Html::style('cryptosorteo/css/landing22.css') !!}
-	{!! Html::style('cryptosorteo/css/nav.css') !!}
+
 
 	
 	</head>
@@ -304,7 +304,7 @@ Home
 	<!-- {!! Html::script('components/js/jquery.js') !!} -->
 	{!! Html::script('cryptosorteo/js/jquery.min.js') !!}
 	<!-- Bootstrap -->
-	{!! Html::script('components/bootstrap/js/bootstrap.min.js') !!}
+	{!! Html::script('cryptosorteo/js/bootstrap.min.js') !!}
 	<!-- Waypoints -->
 	{!! Html::script('cryptosorteo/js/jquery.waypoints.min.js') !!}
 
