@@ -243,6 +243,9 @@ class SorteosController extends Controller
     {
         $sorteo = Sorteo::where('estado_sorteo','En Curso')->first();
         if($sorteo==null){
+            if(Auth::user()->tipo_usuario=='Cliente'){
+                return redirect()->action('AdminController@dashboard')->with("message",'No hay sorteos todavía');
+            }
             return redirect()->action('SorteosController@agregarSorteo')->with("message",'Debe agregar un sorteo primero');
         }
         $total = $sorteo->precio_sorteo;

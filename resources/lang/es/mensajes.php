@@ -81,5 +81,10 @@ return [
     'mensaje'=>'Mensaje',
     'contacto'=>'Contacto',
     'contactar'=>'Contactar',
+    'contactanos'=>'Contáctanos',
     'gracias-contactar'=>'¡Gracias por contactarnos!',
+    'ingresar'=>'Ingresar',
+    'registrate'=>'Regístrate',
+    'sistema-de-premios'=>'Sistema de premios',
+    'como-funciona'=>'Como funciona',
 ];

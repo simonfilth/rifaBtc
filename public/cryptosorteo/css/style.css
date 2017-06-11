@@ -1868,3 +1868,9 @@ h4 {
 .fh5co-cover-background{
   background-image:url(/../../cryptosorteo/images/background3.png);
 }
+
+.img-nav{
+    width: 29px;
+    height: 29px;
+    border: 1px solid #370d1a;
+}

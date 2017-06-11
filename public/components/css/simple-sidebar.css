@@ -5,7 +5,7 @@
   font-size: 13px;
   font-weight: 200;
   /*background-color: #1fcdd3;*/
-  background-color: #505e6d;
+  background-color: #370d1a;
    /*#2e353d;*/
   position: fixed;
   top: 0px;
@@ -16,7 +16,7 @@
 .nav-side-menu .brand {
   margin-top: 1.5vw;
   color: white;
-  background-color: #505e6d;
+  background-color: #370d1a;
   /*background-color: #333f4c;*/
   line-height: 50px;
   display: block;
@@ -113,7 +113,7 @@
   padding-right: 20px;
 }
 .nav-side-menu li:hover {
-  background-color: #505e6d;
+  background-color: #370d1a;
 
   border: 1px solid white;
   /*-webkit-transition: all 1s ease;
@@ -140,7 +140,7 @@
     z-index: 10 !important;
     padding: 3px;
     /*background-color: #ffffff;*/
-    border: 1px solid #505e6d;
+    border: 1px solid #370d1a;
     border-radius: 10%;
     background-color: white;
     color: #000;
@@ -148,7 +148,7 @@
     text-align: center;
   }
   .nav-side-menu .fa-bars{
-    color: #505e6d;
+    color: #370d1a;
   }
   /*.nav-side-menu .toggle-btn:hover {  
     background-color: gray;

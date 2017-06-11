@@ -3,6 +3,14 @@
 @ section('content')
 Home
 @ endsection -->
+@if(Auth::check())
+@php
+  $perfil = App\User::join('otros_datos_usuario','otros_datos_usuario.usuario_id','users.id')
+  ->where('otros_datos_usuario.usuario_id',Auth::user()->id)
+  ->select('otros_datos_usuario.foto_perfil')
+  ->first();
+@endphp
+@endif
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -26,8 +34,7 @@ Home
 	<!-- Theme style  -->
 	{!! Html::style('cryptosorteo/css/style.css') !!}
 	{!! Html::style('cryptosorteo/css/landing22.css') !!}
-
-
+	{!! Html::style('components/css/font-awesome.min.css') !!}
 	
 	</head>
 	<body>
@@ -41,13 +48,57 @@ Home
 		<div class="top">
 			<div class="container">
 				<div class="row">
-					<div class="col-xs-6 text-letf">
+					<div class="col-xs-6 text-left">
 						<p style="color:white;">
 							{!! Html::image('cryptosorteo/images/ACUMULADO.png', 'Acumulado', array('height' => '50', 'width' => '220')) !!}
 							0.012345670 BTC
 						</p>
 					</div>
-					<div class="col-xs-6 text-right">
+					<div class="col-xs-3 text-right">
+						@if (Auth::check())
+							<li class="dropdown" style="list-style: none; margin-top: 20px;">
+		                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="color:white;">
+		                            @if($perfil!=null)
+		                              {!! Html::image('storage/'.Auth::user()->id.'/foto_perfil/'.$perfil->foto_perfil, 'Imagen', array('class' => 'img-nav img-circle')) !!}
+		                            @endif
+		                            {{ Auth::user()->name }} <span class="caret"></span>
+		                        </a>
+
+		                        <ul class="dropdown-menu pull-right" role="menu">
+		                            @if(Auth::user()->tipo_usuario=='Administrador')
+		                            <li>
+		                                <a href="{{ url('dashboard') }}">
+		                                    <i class="fa fa-dashboard"></i> {{trans('mensajes.dashboard')}}
+		                                </a>
+		                            </li>
+		                            @elseif(Auth::user()->tipo_usuario=='Cliente')
+		                            <li>
+		                                <a href="{{ url('dashboard') }}">
+		                                    <i class="fa fa-dashboard"></i> {{trans('mensajes.home')}}
+		                                </a>
+		                            </li>
+		                            @endif
+		                            <li>
+		                                <a href="{{ url('ver-usuario',Auth::user()->id) }}">
+		                                    <i class="fa fa-user"></i> {{trans('mensajes.mi-perfil')}}
+		                                </a>
+		                            </li>
+		                            <li>
+		                                <a href="{{ route('logout') }}"
+		                                    onclick="event.preventDefault();
+		                                             document.getElementById('logout-form').submit();">
+		                                    <i class="fa fa-sign-out"></i> {{trans('mensajes.logout')}}
+		                                </a>
+
+		                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+		                                    {{ csrf_field() }}
+		                                </form>
+		                            </li>
+		                        </ul>
+		                    </li>
+						@endif
+					</div>
+					<div class="col-xs-3 text-right">
 						{!! Html::image('cryptosorteo/images/criptomonedas.png', 'Cryptomonedas', array('height' => '50', 'width' => '220')) !!}
 					</div>
 				</div>
@@ -67,26 +118,27 @@ Home
 					<div class="col-xs-10 text-right menu-1">
 					<h5>	<ul>
 
-						 @if (Auth::guest())
-							<li><a href="{{ route('register') }}">Registrate</a></li>
-							<li><a href="{{ route('login') }}">ingresar</a></li>
-						@else
-							<li>
-                                <a href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
-                                    <i class="fa fa-sign-out"></i> {{trans('mensajes.logout')}}
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                            </li>
+						@if (Auth::guest())
+							<li><a href="{{ route('register') }}">{{trans('mensajes.registrate')}}</a></li>
+							<li><a href="{{ route('login') }}">{{trans('mensajes.ingresar')}}</a></li>
 						@endif
-							<li><a href="#" data-toggle="modal" data-target="#comoFunciona" >Como funciona<i class=""></i></a></a></li>
-							<li><a href="#" data-toggle="modal" data-target="#premios" >SISTEMA DE PREMIOS<i class=""></i></a></a></li>
-							<li><a href="#">Contactos</a></li>
+							<li><a href="#" data-toggle="modal" data-target="#comoFunciona" >{{trans('mensajes.como-funciona')}}<i class=""></i></a></a></li>
+							<li><a href="#" data-toggle="modal" data-target="#premios" >{{trans('mensajes.sistema-de-premios')}}<i class=""></i></a></a></li>
+							<li><a href="#" data-toggle="modal" data-target="#contacto" >{{trans('mensajes.contacto')}}</a></li>
 
+						@if(session()->get('lang')=='en')
+		                    <li>
+		                    <a href="{{ url('lang', ['es']) }}">Es
+		                        <!-- {!! Html::image('assets/imagenes/idioma-icons/eeuu-icon.png', 'Imagen', array('class' => 'img-flag')) !!} -->
+		                    </a>
+		                    </li>
+		                @else
+		                    <li>
+		                    <a href="{{ url('lang', ['en']) }}">En
+		                        <!-- {!! Html::image('assets/imagenes/idioma-icons/ecuador-icon.png', 'Imagen', array('class' => 'img-flag')) !!} -->
+		                    </a>
+		                    </li>
+		                @endif
 
 						</ul></h5>
 					</div>
@@ -97,10 +149,12 @@ Home
 	</nav>
 
 	<header id="fh5co-header" class="fh5co-cover fh5co-cover-background" role="banner">
-
-		<div>
-			{!! Html::image('cryptosorteo/images/cryptoruleta.png', 'Cryptoruleta', array('height' => '250', 'width' => '250')) !!}
+		<div class="row">
+			<div class="col-sm-12">
+				{!! Html::image('cryptosorteo/images/cryptoruleta.png', 'Cryptoruleta', array('height' => '250', 'width' => '250')) !!}
+			</div>
 		</div>
+		
 
 	</header>
 
@@ -226,7 +280,7 @@ Home
 		</div>
 	</div>
 
-					<!--moda de sistema de premios-->
+	<!--moda de sistema de premios-->
 
 
 	<div class="modal-footer">
@@ -297,6 +351,46 @@ Home
 		</div>
 	</div>
 
+<!--moda de sistema de premios-->
+
+
+	<div class="modal-footer">
+		<div class="modal fade" id="contacto" tabindex="-1" role="dialog" aria-labelledby="contacto" aria-hidden="true">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<center>
+							<h3 class="modal-title heading-primary center" id="premios">{{trans('mensajes.contactanos')}}</h3>
+						</center>
+					</div>
+					<div class="modal-body text-justify">
+						@include('errors.errors')
+
+	                    {!! Form::open(['url' => 'contactanos', 'method' => 'post']) !!}
+
+	                        <div class="form-group">
+							    {!! Form::text('name', null, ['class' => 'form-control','placeholder' => trans('mensajes.name'),'required']) !!}
+							</div>
+							<div class="form-group">
+							    {!! Form::email('email', null, ['class' => 'form-control','placeholder' => trans('mensajes.email'),'required']) !!}
+							</div>
+							<div class="form-group">
+							    {!! Form::textarea('mensaje', null, ['class' => 'form-control','placeholder' => trans('mensajes.mensaje'),'required']) !!}
+							</div>
+                     
+	                        <div class="form-group">
+	                            {!! Form::submit(trans('mensajes.submit'), ['class' => 'btn btn-primary']) !!}
+	                        </div>
+
+	                    {!! Form::close() !!}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- Modal de como funciona-->
+
 
 
 
@@ -315,6 +409,17 @@ Home
 	<!-- Main -->
 	{!! Html::script('cryptosorteo/js/main.js') !!}
 	
-
+	<!-- Smartsupp Live Chat script -->
+		<script type="text/javascript">
+		var _smartsupp = _smartsupp || {};
+		_smartsupp.key = '8d905a47427c30952678dbe77fd65da2320ae69c';
+		_smartsupp.loginEmailControl = false;
+		window.smartsupp||(function(d) {
+			var s,c,o=smartsupp=function(){ o..push(arguments)};o.=[]; 
+			s=d.getElementsByTagName('script')[0];c=d.createElement('script');
+			c.type='text/javascript';c.charset='utf-8';c.async=true;
+			c.src='//www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
+		})(document);
+		</script>
 	</body>
 </html>
