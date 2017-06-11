@@ -7,8 +7,7 @@ use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\User;
 use App\modelos\OtroDatoUsuario;
-use App\modelos\Rifa;
-use App\modelos\SorteoEnCurso;
+use App\modelos\Sorteo;
 use Carbon\Carbon;
 use Auth;
 
@@ -16,17 +15,24 @@ class AdminController extends Controller
 {
     public function dashboard(Request $request)
     {
-        $sorteos_vigentes = SorteoEnCurso::first();
-        if($sorteos_vigentes==null){
-            return \Redirect::back()->with("message",'No hay sorteos');
+        $sorteo_en_curso = Sorteo::where('estado_sorteo','En Curso')->first();
+        if($sorteo_en_curso==null){
+            // return \Redirect::back()->with("message",'No hay sorteos');
+            $participantes = [];
+            $dataParticipantes = $participantes;
+            // dd($participantes);
         }
-        $participantes = User::join('rifas_usuarios as RU','RU.usuario_id','users.id')
-            ->join('rifas','rifas.id','RU.rifa_id')
-            ->where('RU.rifa_id',$sorteos_vigentes->rifa_id)->get();
-        $dataParticipantes = $participantes->toArray();
+        else{
+            $participantes = User::join('sorteos_usuarios as SU','SU.usuario_id','users.id')
+            ->join('sorteos','sorteos.id','SU.sorteo_id')
+            ->where('SU.sorteo_id',$sorteo_en_curso->id)->get();
+            $dataParticipantes = $participantes->toArray();
+ 
+        }
+               
         $dataParticipantes = json_encode($dataParticipantes);
 
-        $ganadores = Rifa::join('rifas_usuarios as RU','RU.rifa_id','rifas.id')
+        $ganadores = Sorteo::join('sorteos_usuarios as RU','RU.sorteo_id','sorteos.id')
             ->join('users as U','U.id','RU.usuario_id')
             ->join('premios_primero as PP','PP.usuario_id','U.id')
             ->join('premios_segundo as PS','PS.usuario_id','U.id')
@@ -35,7 +41,61 @@ class AdminController extends Controller
         $dataGanadores = $ganadores->toArray();
         $dataGanadores = json_encode($dataGanadores);
 
-		return \View::make('admin.dashboard',compact('participantes','ganadores','dataParticipantes','dataGanadores'));
+        return \View::make('admin.dashboard',compact('participantes','ganadores','dataParticipantes','dataGanadores'));
+    }
+
+    public function cargarDatosDashboard()
+    {
+
+        $sorteo_en_curso = Sorteo::where('estado_sorteo','En Curso')->first();
+        if($sorteo_en_curso==null){
+            $participantes = [];
+        }
+        else{
+            $participantes = User::join('sorteos_usuarios as SU','SU.usuario_id','users.id')
+            ->join('sorteos','sorteos.id','SU.sorteo_id')
+            ->where('SU.sorteo_id',$sorteo_en_curso->id)->get();
+        }
+               
+
+        $response = [
+           /* 'pagination' => [
+                'total' => $participantes->total(),
+                'per_page' => $participantes->perPage(),
+                'current_page' => $participantes->currentPage(),
+                'last_page' => $participantes->lastPage(),
+                'from' => $participantes->firstItem(),
+                'to' => $participantes->lastItem(),
+            ],*/
+            'data' => $participantes,
+        ];
+
+        return response()->json($response);
+    }
+    public function cargarDatosGanadores()
+    {
+               
+
+        $ganadores = Sorteo::join('sorteos_usuarios as RU','RU.sorteo_id','sorteos.id')
+            ->join('users as U','U.id','RU.usuario_id')
+            ->join('premios_primero as PP','PP.usuario_id','U.id')
+            ->join('premios_segundo as PS','PS.usuario_id','U.id')
+            ->join('premios_tercero as PT','PT.usuario_id','U.id')
+            ->get();
+
+        $response = [
+            /*'pagination' => [
+                'total' => $ganadores->total(),
+                'per_page' => $ganadores->perPage(),
+                'current_page' => $ganadores->currentPage(),
+                'last_page' => $ganadores->lastPage(),
+                'from' => $ganadores->firstItem(),
+                'to' => $ganadores->lastItem(),
+            ],*/
+            'data' => $ganadores,
+        ];
+
+		return response()->json($response);
     }
 
     public function mostrarUsuarios(Request $request)
@@ -70,6 +130,15 @@ class AdminController extends Controller
     	$usuario->created_at = Carbon::now()->format('Y-m-d H:i:s');
     	$usuario->updated_at = Carbon::now()->format('Y-m-d H:i:s');
     	$usuario->save();
+       
+        $contents = \Storage::get('default-profile-pic.png');
+        \Storage::put($usuario->id.'/foto_perfil/default-profile-pic.png', $contents);
+        $foto_usuario=new OtroDatoUsuario;     
+        $foto_usuario->usuario_id = $usuario->id;
+        $foto_usuario->created_at = Carbon::now()->format('Y-m-d H:i:s');
+        $foto_usuario->updated_at = Carbon::now()->format('Y-m-d H:i:s'); 
+        $foto_usuario->foto_perfil="default-profile-pic.png";
+        $foto_usuario->save(); 
 
     	return redirect()->action('AdminController@mostrarUsuarios')->with("message",'Usuario agregado exitósamente');
     }
@@ -88,9 +157,11 @@ class AdminController extends Controller
             ->join('otros_datos_usuario as ODU','ODU.usuario_id','users.id')
             ->first();
             // dd($usuario);
+            
             $tipo_usuario = array('Administrador','Cliente');
             return \View::make('admin.editar-usuario',compact('usuario','tipo_usuario'));
         }
+
         return redirect()->action('HomeController@index');
         
     }

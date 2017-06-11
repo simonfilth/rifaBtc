@@ -1,0 +1,657 @@
+@font-face{
+  font-family: 'Kozuka';
+
+  src: url('http://bitcasinopromo.io/raffle/fonts/KozGoPr6N-Regular.otf');
+
+  font-weight: normal;
+
+  font-style: normal;
+
+}
+
+@font-face{
+  font-family: 'Kozuka';
+
+  src: url('http://bitcasinopromo.io/raffle/fonts/KozGoPr6N-Light.otf');
+
+  font-weight: 300;
+
+  font-style: normal;
+
+}
+
+@font-face{
+  font-family: 'Kozuka';
+
+  src: url('http://bitcasinopromo.io/raffle/fonts/KozGoPr6N-Bold.otf');
+
+  font-weight: 700;
+
+  font-style: normal;
+
+}
+html {
+  background: #1e1e1e;
+  min-height: 100%;
+  font-family: 'Open Sans', sans-serif;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column; }
+
+body {
+  margin: 0;
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-flex: 1;
+      -ms-flex: auto;
+          flex: auto;
+  min-width: 320px; }
+
+body.is-popup-open{
+  overflow: hidden;
+}
+
+a {
+  cursor: pointer; }
+
+.container {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-flex: 1;
+      -ms-flex: auto;
+          flex: auto; }
+  .container .header {
+    background: #000000;
+    text-align: center;
+    padding: 3px 0; }
+  .container .main {
+    width: 96%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    margin: 25px auto 0 auto;
+    position: absolute; }
+    @media only screen and (min-width: 768px) {
+      .container .main {
+        width: 500px; } }
+    @media only screen and (min-width: 992px) {
+      .container .main {
+        width: 550px; } }
+    .container .main .left-img {
+      position: absolute;
+      top: 80px;
+      left: -235px;
+      z-index: -1;
+      display: none; }
+      @media only screen and (min-width: 768px) {
+        .container .main .left-img {
+          display: block; } }
+    .container .main .right-img {
+      position: absolute;
+      top: 67px;
+      right: -124px;
+      z-index: -1;
+      display: none; }
+      @media only screen and (min-width: 768px) {
+        .container .main .right-img {
+          display: block; } }
+    .container .main-wrp {
+      -webkit-box-flex: 1;
+          -ms-flex-positive: 1;
+              flex-grow: 1;
+      background: url(../images/raffle-bg.jpg) no-repeat;
+      background-position: 50% 50%;
+      background-size: cover;
+      z-index: 1; }
+      .container .main-wrp .line {
+        width: 100%;
+        height: 4px;
+        background: #f27a00;
+        background: -webkit-radial-gradient(circle, #f27a00 50%, #924a00, #321900);
+        background: radial-gradient(circle, #f27a00 50%, #924a00, #321900); }
+      .container .main-wrp .first-size {
+        font-family: 'Lato', sans-serif;
+        text-transform: uppercase;
+        color: #ffffff;
+        font-size: 22px;
+        text-align: center;
+        margin: 0;
+        padding-top: 24px; }
+        @media only screen and (min-width: 768px) {
+          .container .main-wrp .first-size {
+            font-size: 32px; } }
+        @media only screen and (min-width: 992px) {
+          .container .main-wrp .first-size {
+            font-size: 41px; } }
+      .container .main-wrp .second-size {
+        font-family: 'Lato', sans-serif;
+        text-transform: uppercase;
+        color: #ffffff;
+        font-size: 40px;
+        text-align: center;
+        font-weight: bold;
+        margin: 0;
+        word-spacing: 10px; }
+        @media only screen and (min-width: 768px) {
+          .container .main-wrp .second-size {
+            font-size: 48px; } }
+        @media only screen and (min-width: 992px) {
+          .container .main-wrp .second-size {
+            font-size: 70px; } }
+        .container .main-wrp .second-size > span {
+          color: #fdcf00; }
+      .container .main-wrp .third-size {
+        font-family: 'Lato', sans-serif;
+        font-size: 20px;
+        color: #fdcf00;
+        text-align: center;
+        margin: 0;
+        word-spacing: 5px; }
+        @media only screen and (min-width: 768px) {
+          .container .main-wrp .third-size {
+            font-size: 26px; } }
+        @media only screen and (min-width: 992px) {
+          .container .main-wrp .third-size {
+            font-size: 28px; } }
+        .container .main-wrp .third-size > span {
+          color: #ffffff; }
+    .container .main .timer {
+      padding-bottom: 30px;
+      background: rgba(23, 3, 9, 0.8); }
+      .container .main .timer .timer-title {
+        font-family: 'Lato', sans-serif;
+        text-transform: uppercase;
+        font-size: 24px;
+        color: #fdcf00;
+        font-weight: 300;
+        margin-bottom: 30px;
+        text-align: center; }
+    .container .main .slogan {
+      font-family: 'Lato', sans-serif;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: #ffffff;
+      background: #1e1e1e;
+      padding: 10px 20px 35px 20px;
+      margin: 0;
+      text-align: center;
+      word-spacing: 3px;
+      border-top: 1px solid #333333;
+      position: relative; }
+      @media only screen and (min-width: 400px) {
+        .container .main .slogan {
+          padding-bottom: 55px; } }
+      @media only screen and (min-width: 600px) {
+        .container .main .slogan {
+          padding-bottom: 78px; } }
+      @media only screen and (min-width: 768px) {
+        .container .main .slogan {
+          padding-bottom: 73px; } }
+      .container .main .slogan img {
+        position: absolute;
+        bottom: -27px;
+        left: 0;
+        width: 100%; }
+    .container .main .joinus {
+      background: url(../images/pattern-bg.jpg) no-repeat;
+      background-size: cover;
+      padding: 15px;
+      margin-bottom: 10px; }
+      .container .main .joinus .signup {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+        -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+                justify-content: space-between;
+        text-align: center; }
+        .container .main .joinus .signup .sign {
+          color: #fdcf00;
+          font-family: 'Lato', sans-serif;
+          font-weight: bold;
+          font-size: 20px;
+          display: inline-block;
+          text-decoration: none;
+          padding-bottom: 1px;
+          border-bottom: 1px solid #fdcf00;
+          width: 145px;
+          margin: 0 auto;
+          word-spacing: 5px; }
+          .container .main .joinus .signup .sign:hover {
+            border-bottom: 1px solid transparent; }
+        .container .main .joinus .signup .text {
+          font-family: 'Lato', sans-serif;
+          font-size: 15px;
+          color: #ffffff; }
+        .container .main .joinus .signup .wrp {
+          position: relative;
+          margin: 17px auto 14px auto;
+          width: 207px; }
+          .container .main .joinus .signup .wrp img {
+            position: absolute;
+            top: 50%;
+            -webkit-transform: translateY(-50%);
+                    transform: translateY(-50%);
+            left: 10px; }
+          .container .main .joinus .signup .wrp input {
+            border-radius: 4px;
+            color: #757579;
+            font-size: 16px;
+            border: none;
+            text-align: center;
+            padding: 12px 5px 12px 15px;
+            outline: none;
+            box-sizing: border-box;
+            width: 207px;
+            box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.8); }
+      .container .main .joinus > div {
+        color: #cccccc;
+        font-size: 11px;
+        text-align: center;
+        margin-top: 10px; }
+        .container .main .joinus > div > img {
+          margin-right: 10px; }
+    .container .main .info-block {
+      background: rgba(31, 2, 4, 0.7);
+      border-radius: 3px;
+      margin-bottom: 5px;
+      padding: 0 15px 13px 15px; }
+      .container .main .info-block p {
+        margin: 0;
+        padding: 10px 0 0 0;
+        font-size: 11px;
+        line-height: 16px;
+        color: #ffffff;
+        font-family: 'Roboto', sans-serif; }
+  .container .footer {
+    border-top: 3px solid #f37b00;
+    position: relative;
+    background: url("../images/footer-shadow.png") no-repeat 50% 0; }
+    .container .footer .logos {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+      margin: 30px auto 10px auto;
+      z-index: 1;
+      max-width: 1050px;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap; }
+      .container .footer .logos > a {
+        margin: 0 5px;
+        z-index: 1; }
+    .container .footer .footer-nav {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+      margin: 0 auto 10px auto;
+      max-width: 800px;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap; }
+      .container .footer .footer-nav > a {
+        padding: 0 10px;
+        margin-bottom: 5px;
+        display: block;
+        border-left: 1px solid #2e2e2e;
+        color: #e98011;
+        font-size: 14px;
+        text-decoration: none; }
+        .container .footer .footer-nav > a:first-child {
+          border-left: none; }
+    .container .footer .copyright {
+      font-size: 11px;
+      font-weight: 400;
+      text-align: center;
+      color: #ffffff;
+      margin: 45px 0 20px 0;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: start;
+          -ms-flex-align: start;
+              align-items: flex-start;
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap; }
+      .container .footer .copyright .coingaming-link {
+        text-decoration: none;
+        padding: 0 5px; }
+    .container .footer .footer-text {
+      font-size: 11px;
+      font-weight: 400;
+      text-align: center;
+      color: #ffffff;
+      padding-bottom: 40px;
+      max-width: 1150px;
+      margin: 0 auto; }
+      .container .footer .footer-text a {
+        color: #337ab7;
+        text-decoration: none; }
+
+.signup button{
+  padding: 0;
+  width: 207px;
+  height: 60px;
+  border: none;
+  border-radius: 6px;
+  outline: none;
+  background: #2c5207;
+  cursor: pointer;
+}
+
+.popup{
+  background: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  /*display: flex;*/
+  align-items: center;
+  justify-content: center;
+  display: none;
+}
+
+.popup.is-shown{
+  display: flex;
+}
+
+.popup .popup-block{
+ padding: 35px 5px;
+  background: #292929;
+  position: relative;
+  text-align: center;
+  border: 1px dashed #fdcf00;
+}
+
+@media only screen and (min-width: 600px){
+  .popup .popup-block{
+    padding: 35px 65px;
+  }
+}
+
+.popup .popup-block .close-btn{
+  position: absolute;
+  top: -15px;
+  right: -10px;
+  cursor: pointer;
+}
+
+.popup .popup-block h4{
+  color: #fdcf00;
+  font-family: 'Lato', sans-serif;
+  margin: 0;
+  font-size: 24px;
+  padding-bottom: 20px;
+}
+
+.popup .popup-block p{
+  color: #ffffff;
+  font-family: 'Lato', sans-serif;
+  font-size: 15px;
+  margin: 0;
+}
+
+.popup .popup-block p > span{
+  color: #fdcf00;
+  display: block;
+  padding: 15px 0 5px 0;
+}
+
+.popup .popup-block .banner{
+  min-width: 300px;
+  height: 250px;
+}
+
+.popup .popup-block .redirect-timer {
+  display: inline-block;
+  font-size: 24px;
+  margin: 0 3px;
+}
+
+.container.japanese .main-wrp .first-size,
+.container.japanese .main-wrp .second-size,
+.container.japanese .main-wrp .third-size,
+.container.japanese .main .timer .timer-title,
+.container.japanese .main .timer .countdown .count-title,
+.container.japanese .main .slogan,
+.container.japanese .main .joinus .signup .sign,
+.container.japanese .main .joinus .signup .text,
+.container.japanese .main .joinus .signup .wrp input,
+.container.japanese .main .joinus > div,
+.container.japanese .main .info-block p,
+.container.japanese .footer .footer-nav > a,
+.container.japanese .footer .footer-text,
+.container.japanese .popup .popup-block h4,
+.container.japanese .popup .popup-block p,
+.container.japanese .popup .popup-block p > span
+{
+  font-family: 'Kozuka';
+ }
+
+.container.japanese .main-wrp .first-size{
+  padding-top: 9px;
+}
+
+.container.japanese .main-wrp .second-size{
+  line-height: 56px;
+}
+
+.container.japanese .main{
+  margin-top: 13px;
+}
+
+.container.japanese .main .timer{
+  padding-bottom: 11px;
+}
+
+.container.japanese .main .timer .timer-title{
+  margin-top: 15px;
+}
+
+.container.japanese .main .slogan{
+  line-height: 15px;
+  font-weight: normal;
+}
+
+.container.japanese .main .slogan > img{
+  bottom: -29px;
+}
+
+.container.japanese .main .joinus .signup .sign{
+  line-height: 27px;
+  border-bottom: 2px solid #fdcf00;
+  font-weight: normal;
+  padding-bottom: 0;
+}
+
+.container.japanese .main .joinus .signup .wrp{
+  margin: 3px auto 14px auto;
+}
+
+.container.japanese .main .joinus .signup .wrp input{
+  padding: 6px 5px 6px 15px;
+}
+
+.container.japanese .main .joinus{
+  margin-bottom: 6px;
+  padding-bottom: 10px;
+}
+
+.container.japanese .popup-block{
+  padding: 25px 5px 35px 5px;
+}
+
+@media only screen and (min-width: 600px){
+  .container.japanese .popup-block{
+    padding: 25px 13px 35px 13px;
+  }
+}
+
+.container.japanese .popup p{
+  line-height: 18px;
+  font-size: 14px;
+}
+
+.container.japanese .popup h4{
+  padding-bottom: 10px;
+}
+
+.container.japanese .popup h4{
+  padding-bottom: 10px;
+}
+
+.container.japanese .main .left-img{
+  top: 7px;
+  left: -208px;
+}
+
+.container.japanese .main .right-img{
+  top: 10px;
+  right: -219px;
+}
+
+.container.chinese .main-wrp .first-size,
+.container.chinese .main-wrp .second-size,
+.container.chinese .main-wrp .third-size,
+.container.chinese .main .timer .timer-title,
+.container.chinese .main .timer .countdown .count-title,
+.container.chinese .main .slogan,
+.container.chinese .main .joinus .signup .sign,
+.container.chinese .main .joinus .signup .text,
+.container.chinese .main .joinus .signup .wrp input,
+.container.chinese .main .joinus > div,
+.container.chinese .main .info-block p,
+.container.chinese .footer .footer-nav > a,
+.container.chinese .footer .footer-text,
+.container.chinese .popup .popup-block h4,
+.container.chinese .popup .popup-block p,
+.container.chinese .popup .popup-block p > span
+{
+  font-family: 'PingFang';
+}
+
+.container.chinese .main-wrp .first-size{
+  padding-top: 27px;
+  padding-bottom: 20px;
+}
+
+.container.chinese .main-wrp .second-size{
+  line-height: 56px;
+  font-weight: normal;
+}
+
+.container.chinese .main{
+  margin-top: 20px;
+}
+
+.container.chinese .main .timer{
+  padding-bottom: 11px;
+}
+
+.container.chinese .main .timer .timer-title{
+  margin-top: 15px;
+}
+
+.container.chinese .main .slogan{
+  line-height: 15px;
+  font-weight: normal;
+}
+
+.container.chinese .main .slogan > img{
+  bottom: -29px;
+}
+
+.container.chinese .main .joinus .signup .sign{
+  line-height: 27px;
+  border-bottom: 2px solid #fdcf00;
+  font-weight: bold;
+  padding-bottom: 0;
+  width: auto;
+}
+
+.container.chinese .main .joinus .signup span{
+  padding: 5px 0;
+}
+
+.container.chinese .main .joinus .signup .wrp{
+  margin: 3px auto 14px auto;
+}
+
+.container.chinese .main .joinus .signup .wrp input{
+  padding: 11px 5px 11px 15px;
+}
+
+.container.chinese .main .joinus{
+  margin-bottom: 6px;
+  padding-bottom: 10px;
+}
+
+.container.chinese .main .info-block {
+  margin-bottom: 9px;
+  padding: 17px 15px 45px 15px;
+}
+
+.container.chinese .popup-block{
+  padding: 25px 5px 35px 5px;
+}
+
+@media only screen and (min-width: 600px){
+  .container.chinese .popup-block{
+    padding: 25px 13px 35px 13px;
+    width: 430px;
+  }
+}
+
+.container.chinese .popup p{
+  line-height: 18px;
+  font-size: 14px;
+}
+
+.container.chinese .popup h4{
+  padding-bottom: 10px;
+}
+
+.container.chinese .popup h4{
+  padding-bottom: 10px;
+}
+
+.container.chinese .main .left-img{
+  top: 7px;
+  left: -208px;
+}
+
+.container.chinese .main .right-img{
+  top: 10px;
+  right: -219px;
+}

@@ -42,28 +42,40 @@ Route::group(['middleware' => 'auth'], function () {
 
 		Route::get('eliminar-usuario/{id}', 'AdminController@eliminarUsuario');
 
-		Route::get('mostrar-rifas', 'RifasController@mostrarRifas');
-		Route::get('agregar-rifa', 'RifasController@agregarRifa');
-		Route::post('guardar-rifa', 'RifasController@guardarRifa');
-		Route::get('ver-rifa/{id}', 'RifasController@verRifa');
-		Route::get('editar-rifa/{id}', 'RifasController@editarRifa');
-		Route::patch('actualizar-rifa/{id}', 'RifasController@actualizarRifa');
-		Route::get('eliminar-rifa/{id}', 'RifasController@eliminarRifa');
-		Route::get('confirmar-pago/{id}', 'RifasController@confirmarPago');
-		Route::get('agregar-sorteo', 'RifasController@agregarSorteo');
-		Route::post('guardar-sorteo', 'RifasController@guardarSorteo');
+		Route::get('mostrar-sorteos', 'SorteosController@mostrarSorteos');
+		Route::get('agregar-sorteo', 'SorteosController@agregarSorteo');
+		Route::post('guardar-sorteo', 'SorteosController@guardarSorteo');
+		Route::get('ver-sorteo/{id}', 'SorteosController@verSorteo');
+		Route::get('editar-sorteo/{id}', 'SorteosController@editarSorteo');
+		Route::patch('actualizar-sorteo/{id}', 'SorteosController@actualizarSorteo');
+		Route::get('eliminar-sorteo/{id}', 'SorteosController@eliminarSorteo');
+		Route::get('confirmar-pago/{id}', 'SorteosController@confirmarPago');
+		Route::get('agregar-sorteo-en-curso', 'SorteosController@agregarSorteoEnCurso');
+		Route::post('guardar-sorteo-en-curso', 'SorteosController@guardarSorteoEnCurso');
+
+		Route::get('cargar-sorteos', 'SorteosController@cargarSorteos');
+		Route::get('cargar-datos-dashboard', 'AdminController@cargarDatosDashboard');
+		Route::get('cargar-datos-ganadores', 'AdminController@cargarDatosGanadores');
+		Route::post('comenzar-sorteo-en-curso/{id}', 'SorteosController@comenzarSorteoEnCurso');
+		Route::post('terminar-sorteo-en-curso/{id}', 'SorteosController@terminarSorteoEnCurso');
+		Route::post('sorteo-no-realizado/{id}', 'SorteosController@sorteoNoRealizado');
+
+		Route::get('jugar-ruleta', 'SorteosController@jugarRuleta');
 	});
 
 	Route::group(['middleware' => 'roles','roles' => ['Administrador', 'Cliente']], function () {
 		Route::get('ver-usuario/{id}', 'AdminController@verUsuario');
-		Route::get('unirse-a-sorteo', 'RifasController@unirseSorteo');
-		Route::post('guardar-union-sorteo/{id}', 'RifasController@guardarUnionSorteo');
+		Route::get('unirse-a-sorteo', 'SorteosController@unirseSorteo');
+		Route::post('guardar-union-sorteo/{id}', 'SorteosController@guardarUnionSorteo');
 		Route::get('panel-cliente', 'ClientesController@panelCliente');
 		Route::get('editar-usuario/{id}', 'AdminController@editarUsuario');
 		Route::patch('actualizar-usuario/{id}', 'AdminController@actualizarUsuario');
 		Route::patch('guardar-foto-usuario/{id}', 'AdminController@guardarFotoUsuario');
-		Route::get('mostrar-participantes/{id?}', 'RifasController@mostrarParticipantes');
+		Route::get('mostrar-participantes/{id?}', 'SorteosController@mostrarParticipantes');
 		Route::get('dashboard', 'AdminController@dashboard');
+
+		Route::get('premios', 'SorteosController@premios');
+		Route::get('sorteo-en-vivo', 'SorteosController@sorteoEnVivo');
 	});
 });
 

@@ -1,8 +1,10 @@
-	{!! Html::script('components/js/jquery.js') !!}
+	<!-- <script src="/js/app.js"></script> -->
+    {!! Html::script('components/js/jquery.js') !!}
     {!! Html::script('components/bootstrap/js/bootstrap.min.js') !!}
 	{!! Html::script('components/js/custom.js') !!}
     {!! Html::script('components/jquery-ui/jquery-ui.min.js') !!}
 	{!! Html::script('components/js/sorttable.js') !!}
+
 	<script>
 $(function(){
 	$(".datepicker").datepicker({

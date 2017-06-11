@@ -1,6 +1,6 @@
 @if($errors->any())
 	<div class="alert alert-danger" role="alert">
-	    <p>Por favor corrija los siguientes errores:</p>
+	    <p>{{trans('mensajes.errors')}}</p>
 	    <ul>
 	    @foreach($errors->all() as $error)
 	        <li>{{$error}}</li>

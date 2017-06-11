@@ -29,13 +29,12 @@
                     {!! Form::model($usuario, ['url' => ['guardar-foto-usuario', $usuario->usuario_id], 'method' => 'patch','files' => true]) !!}
 
                         <div class="form-group">
-                            {!! Form::label('foto_perfil', {{trans('mensajes.foto-perfil')}}.':') !!}
-                            {!! Form::file('foto_perfil') !!}
+                            {!! Form::label('foto_perfil', trans('mensajes.seleccione-foto-perfil').':', array('class' => 'btn btn-success')) !!}
+                            {!! Form::file('foto_perfil', ["style"=>"visibility:hidden;" ]) !!}
                         </div>
 
-                        
                         <div class="form-group">
-                            {!! Form::submit('{{trans('mensajes.save')}}', ['class' => 'btn btn-primary']) !!}
+                            {!! Form::submit(trans('mensajes.save'), ['class' => 'btn btn-primary']) !!}
                         </div>
 
                     {!! Form::close() !!}

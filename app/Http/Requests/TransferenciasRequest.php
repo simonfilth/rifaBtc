@@ -24,7 +24,7 @@ class TransferenciasRequest extends FormRequest
     public function rules()
     {
         return [
-            'id_transferencia' => 'required|unique:rifas_usuarios',
+            'id_transferencia' => 'required|unique:sorteos_usuarios',
         ];
     }
 }

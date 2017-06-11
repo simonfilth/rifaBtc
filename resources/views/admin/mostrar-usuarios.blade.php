@@ -38,7 +38,7 @@
                             <br> 
                         </div>
                         <div class="col-sm-3">
-                            <a href="{{url('agregar-usuario')}}" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> {{trans('mensajes.nuevo-usuario')}}</a>
+                            <a href="{{url('agregar-usuario')}}" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> {{trans('mensajes.new')}} {{trans('mensajes.usuario')}}</a>
                         </div>
  
                     </div>                  
@@ -47,7 +47,7 @@
                 
                 <table id="table-responsive" class="table table-condensed table-striped sortable ">
                     <thead>
-                        <th>{{trans('mensajes.nombre')}}</th>
+                        <th>{{trans('mensajes.name')}}</th>
                         <th>{{trans('mensajes.email')}}</th>
                         <th>{{trans('mensajes.id-wallet')}}</th>
                         <th>{{trans('mensajes.accion')}}</th>

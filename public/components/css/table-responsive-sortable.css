@@ -9,7 +9,7 @@ table#table-responsive {
   /*font-family: Agenda-Light, sans-serif;*/
   font-weight: 100; 
   /*background: #333;*/
-  background: #0096bc;
+  background: #370D1A;
    color: #fff;
   text-rendering: optimizeLegibility;
   border-radius: 5px; 
@@ -51,7 +51,7 @@ table#table-responsive tbody tr:not(:last-child) {
 		display: block; padding: .6rem; 
 	}
 	table#table-responsive tbody tr td:first-child { 
-		background: #0096bc;
+		background: #370D1A;
 		color: #fff; 
 	}
 	table#table-responsive tbody td:before { 

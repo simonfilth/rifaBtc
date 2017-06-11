@@ -13,6 +13,11 @@
                     {{trans('mensajes.dashboard')}}
                 @endif
             </h1>
+            <div class="text-success text-center">
+                @if(Session::has('message'))
+                    {{Session::get('message')}}
+                @endif
+            </div> 
             <ol class="breadcrumb">
                 <li class="active">
                     <i class="fa fa-dashboard"></i> Dashboard
@@ -27,130 +32,19 @@
         @if(Auth::user()->tipo_usuario == 'Administrador')
         <app-panel color_panel="yellow" click_panel="Agregar" fa_style="plus" mensaje_panel="{{trans('mensajes.agregar-sorteo')}}"  huge_panel="A"></app-panel>
         @else
-        <app-panel color_panel="yellow" click_panel="Unirse" fa_style="comments" mensaje_panel="{{trans('mensajes.unirse-sorteo')}}"  huge_panel="U"></app-panel>
+        <app-panel color_panel="yellow" click_panel="Unirse" fa_style="diamond" mensaje_panel="{{trans('mensajes.unirse-sorteo')}}"  huge_panel="U"></app-panel>
         @endif
-        <app-panel color_panel="red" click_panel="Proximo" fa_style="comments" mensaje_panel="{{trans('mensajes.proximos-sorteos')}}"  huge_panel="P"></app-panel>
+        <app-panel color_panel="red" click_panel="Proximo" fa_style="angle-double-right" mensaje_panel="{{trans('mensajes.proximos-sorteos')}}"  huge_panel="P"></app-panel>
 
-
-        <!-- <div class="col-lg-3 col-md-6">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <a @click="addRemoveParticipantes" class="href-panel">
-                        <div class="row">
-                            <div class="col-xs-3">
-                                <i class="fa fa-users fa-5x"></i>
-                            </div>
-                            <div class="col-xs-9 text-right">
-                                <div class="huge">{{count($participantes)}}</div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12">{{trans('mensajes.lista-participantes')}}</div>
-                        </div> 
-                    </a> 
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-green">
-                <div class="panel-heading">
-                    <a href="#" class="href-panel">
-                        <div class="row">
-                            <div class="col-xs-3">
-                                <i class="fa fa-trophy fa-5x"></i>
-                            </div>
-                            <div class="col-xs-9 text-right">
-                                <div class="huge">{{count($participantes)}}</div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12">{{trans('mensajes.ultimos-ganadores')}}</div>
-                        </div> 
-                    </a>                
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-yellow">
-                <div class="panel-heading">
-                    <a href="#" class="href-panel">
-                        <div class="row">
-                            <div class="col-xs-3">
-                                <i class="fa fa-comments fa-5x"></i>
-                            </div>
-                            <div class="col-xs-9 text-right">
-                                <div class="huge">{{count($participantes)}}</div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12">{{trans('mensajes.unirse-sorteo')}}</div>
-                        </div> 
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-            <div class="panel panel-red">
-                <div class="panel-heading">
-                    <a href="#" class="href-panel">
-                        <div class="row">
-                            <div class="col-xs-3">
-                                <i class="fa fa-comments fa-5x"></i>
-                            </div>
-                            <div class="col-xs-9 text-right">
-                                <div class="huge">{{count($participantes)}}</div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12">{{trans('mensajes.proximos-sorteos')}}</div>
-                        </div> 
-                    </a>
-                    
-                </div>
-            </div>
-        </div> -->
     </div>
-    <!-- <div v-if="clickParticipantes" class="row">
-        <div class="col-sm-12">
-            <div>
-                <table id="table-responsive" class="table table-condensed table-striped sortable ">
-                    <thead>
-                        <th>Nombre</th>
-                        <th>ID Wallet</th>
-                        @if(Auth::user()->tipo_usuario == 'Administrador')
-                        <th>ID Transferencia</th>
-                        <th>Confirmar Pago</th>
-                        @endif
-                    </thead>
-                    <tbody>
-                        @forelse($participantes as $participante)
-                        <tr>
-                            <td>{!!$participante->name!!} {!!$participante->apellido!!}</td>
-                            <td>{!!$participante->id_wallet!!}</td>
-                        @if(Auth::user()->tipo_usuario == 'Administrador')
-                            <td>{!!$participante->id_transferencia!!}</td>
-                            @if($participante->confirmar_pago == 0)
-                                <td><a class="btn btn-primary" href="{{url('confirmar-pago',$participante->id_transferencia)}}">Confirmar pago</a></td>
-                            @elseif($participante->confirmar_pago == 1)
-                                <td><p class="text-success"><i class="fa fa-check"></i> Pago confirmado</p></td>
-                            @endif
-                        @endif
-                        </tr>
-                        @empty
-                            <tr><td align="center" colspan="4">No se encontraron resultados</td></tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div> -->
+
     
 
     <div v-if="clickParticipantes" class="row">
         <div class="col-sm-12">
             <table id="table-responsive" class="table table-condensed table-striped sortable ">
                 <thead>
-                    <th>{{trans('mensajes.nombre')}}</th>
+                    <th>{{trans('mensajes.name')}}</th>
                     <th>{{trans('mensajes.id-wallet')}}</th>
                     @if(Auth::user()->tipo_usuario == 'Administrador')
                     <th>{{trans('mensajes.id-transferencia')}}</th>
@@ -167,7 +61,8 @@
                         <td v-else-if="participante.confirmar_pago == 1"><p class="text-success"><i class="fa fa-check"></i>{{trans('mensajes.pago-confirmado')}}</p></td>
                     @endif
                     </tr>
-                    <div v-if="participantes.length == 0">
+
+                    <template v-if="participantes.length == 0">
                         <tr>
                         @if(Auth::user()->tipo_usuario == 'Administrador')
                             <td colspan="4" align="center">
@@ -177,7 +72,7 @@
                                 {{trans('mensajes.todavia-no-hay-participantes')}}
                             </td>
                         </tr>
-                    </div>
+                    </template>
                 </tbody>
             </table>
         </div>
@@ -195,27 +90,27 @@
                     <tr v-for="ganador in ganadores">   
                         <td>@{{ganador.name}} @{{ganador.apellido}}</td>
                         <td>@{{ganador.id_wallet}}</td>
-                        <td>@{{ganador.fecha_rifa}}</td>
+                        <td>@{{ganador.fecha_sorteo}}</td>
                     </tr>
-                    <div v-if="ganadores.length == 0">
+                    <template v-if="ganadores.length == 0">
                         <tr>
                             <td colspan="3" align="center">
                                 {{trans('mensajes.todavia-no-hay-ganadores')}}
                             </td>
                         </tr>
-                    </div>
+                    </template>
                 </tbody>
             </table>
         </div>
     </div>
-    <div class="row">
+    <!-- <div class="row">
         <div class="col-sm-12">
-             <!-- <hr>
+             <hr>
              <pre>
-                 @ { { $data }}
-             </pre> -->
+                 @{{ $data }}
+             </pre>
         </div>
-    </div>
+    </div> -->
 </div>
 
 
@@ -242,6 +137,7 @@
 </script>
 
 <script type="text/javascript">
+
 
 Vue.component('app-panel',{
     template: '#panel-template',
@@ -311,18 +207,77 @@ var dataGanadores = {!! $dataGanadores !!};
         data: {
             participantes: dataParticipantes,
             ganadores: dataGanadores,
+            /*participantes: [],
+            ganadores: [],*/
+            // pagination: {
+            //     total: 0,
+            //     per_page: 2,
+            //     from: 1,
+            //     to: 0,
+            //     current_page: 1,
+            // },
+            // offset: 4,
+            // formErrors: {},
+            // formErrorsUpdate: {}
             clickParticipantes: false,
             clickGanadores: false
-        }/*,
-        methods: {
-            addRemoveParticipantes: function(){
-                if(this.clickParticipantes){
-                    this.clickParticipantes=false;
-                }
-                else
-                    this.clickParticipantes=true;
-            }
-        }*/
+        },
+        // mounted() {
+            // this.getVueDashboard();
+            // this.getVueGanadores();
+           /* this.getVueDashboard(this.pagination.current_page);
+            this.getVueGanadores(this.pagination.current_page);*/
+            
+        // },
+        // methods: {
+           /* getVueDashboard: function(page) {
+                axios.get('cargar-datos-dashboard?page='+page).then(function (response) {
+                    vm.$nextTick(function() {
+                        console.log(response.data.data);
+                        this.participantes = response.data.data.data;;
+                        this.pagination = response.data.pagination;
+
+                    })
+                });
+            },
+            getVueGanadores: function(page) {
+                axios.get('cargar-datos-ganadores?page='+page).then(function (response) {
+                    vm.$nextTick(function() {
+                        console.log(response.data.data);
+                        this.ganadores = response.data.data.data;
+                        this.pagination = response.data.pagination;
+
+                    })
+                });
+            },
+            changePageGanadores: function(page) {
+                this.pagination.current_page = page;
+                this.getVueGanadores(page);
+            },
+            changePageParticipantes: function(page) {
+                this.pagination.current_page = page;
+                this.getVueDashboard(page);
+            }*/
+            /*getVueDashboard: function() {
+                axios.get('cargar-datos-dashboard').then(function (response) {
+                    vm.$nextTick(function() {
+                        console.log("participantes");
+                        console.log(response.data.data);
+                        this.participantes = response.data.data;
+                    })
+                });
+            },*/
+           /* getVueGanadores: function() {
+                axios.get('cargar-datos-ganadores').then(function (response) {
+                    vm.$nextTick(function() {
+                        console.log("ganadores");
+                        console.log(response);
+                        this.ganadores = response.data.data;
+
+                   })
+                });
+            } */
+        // }
      });
  </script>
 @endsection

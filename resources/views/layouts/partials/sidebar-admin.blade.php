@@ -12,7 +12,7 @@
         @endif
         <div>{{ Auth::user()->name }}</div>
         <a class="btn btn-primary" href="{{ url('ver-usuario',Auth::user()->id) }}">
-            <i class="fa fa-user"></i> Mi Perfil
+            <i class="fa fa-user"></i> {{trans('mensajes.mi-perfil')}}
         </a>
       </div>
       <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
@@ -21,31 +21,34 @@
     
               <ul id="menu-content" class="menu-content collapse out">
 
-                  <li  data-toggle="collapse" data-target="#usuarios" class="collapsed">
-                    <a href="{{url('/')}}"><i class="fa fa-home fa-lg"></i> Inicio</a> 
+                  <li>
+                    <a href="{{url('/')}}"><i class="fa fa-home fa-lg"></i> {{trans('mensajes.home')}}</a> 
                   </li>
 
-                  <li  data-toggle="collapse" data-target="#usuarios" class="collapsed">
-                    <a href="{{url('dashboard')}}"><i class="fa fa-dashboard fa-lg"></i> Dashboard</a> 
+                  <li>
+                    <a href="{{url('dashboard')}}"><i class="fa fa-dashboard fa-lg"></i> {{trans('mensajes.dashboard')}}</a> 
                   </li>
 
-                  <li  data-toggle="collapse" data-target="#usuarios" class="collapsed">
-                    <a href="{{url('mostrar-usuarios')}}"><i class="fa fa-users fa-lg"></i> Administrar</a> 
+                  <li>
+                    <a href="{{url('mostrar-usuarios')}}"><i class="fa fa-users fa-lg"></i> {{trans('mensajes.usuarios')}}</a> 
                   </li>
-                  <li  data-toggle="collapse" data-target="#usuarios" class="collapsed">
-                    <a href="{{url('mostrar-rifas')}}"><i class="fa fa-btc fa-lg"></i> Rifas</a> 
-                  </li>
-
-                  <li  data-toggle="collapse" data-target="#usuarios" class="collapsed">
-                    <a href="{{url('agregar-sorteo')}}"><i class="fa fa-plus fa-lg"></i> {{trans('mensajes.agregar-sorteo')}}</a> 
+                  <li>
+                    <a href="{{url('mostrar-sorteos')}}"><i class="fa fa-btc fa-lg"></i> {{trans('mensajes.sorteos')}}</a> 
                   </li>
 
-                  <li  data-toggle="collapse" data-target="#usuarios" class="collapsed">
-                    <a href="{{url('/')}}"><i class="fa fa-gift fa-lg"></i> Premios</a> 
+                  <li>
+                    <a href="{{url('premios')}}"><i class="fa fa-gift fa-lg"></i> {{trans('mensajes.premios')}}</a> 
+                  </li>
+                  <li>
+                    <a href="#"><i class="fa fa-calendar fa-lg"></i> {{trans('mensajes.calendario')}}</a>
                   </li>
 
-                  <li data-toggle="collapse" data-target="#citas" class="collapsed">
-                    <a href="#"><i class="fa fa-calendar fa-lg"></i> Calendario</a>
+                  <li>
+                    <a href="{{url('sorteo-en-vivo')}}"><i class="fa fa-video-camera fa-lg"></i> {{trans('mensajes.sorteo-en-vivo')}}</a> 
+                  </li>
+
+                  <li>
+                    <a href="{{url('jugar-ruleta')}}"><i class="fa fa-play fa-lg"></i> {{trans('mensajes.jugar-ruleta')}}</a>
                   </li>
              
               </ul>

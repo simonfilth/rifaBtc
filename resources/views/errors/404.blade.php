@@ -6,12 +6,12 @@
 			<div class="col-md-6 col-md-offset-3">
 				<div class="panel panel-danger" style="margin-top: 50px;">
 					<div class="panel-heading">
-						<h2 class="text-center"><i class="fa fa-frown-o fa-2x"></i> !Página no encontrada¡</h2>
+						<h2 class="text-center"><i class="fa fa-frown-o fa-2x"></i> {{trans('mensajes.page-not-found')}}</h2>
 					</div>
 					<div class="panel-body text-center">
-						<h4>La página solicitada no se pudo encontrar, asegurese que sea la correcta</h4>
+						<h4>{{trans('mensajes.404')}}</h4>
 						<br>
-						<a href="{{url('/')}}"><i class="fa fa-arrow-circle-o-left fa-lg"></i> Volver al sitio</a>
+						<a href="{{url('/')}}"><i class="fa fa-arrow-circle-o-left fa-lg"></i> {{trans('mensajes.go-back')}}</a>
 					</div>					
 				</div>
 			</div>

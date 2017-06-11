@@ -1,12 +1,12 @@
 {!! csrf_field() !!}
 
 <div class="form-group">
-    {!! Form::label('name', trans('mensajes.nombre').':') !!}
+    {!! Form::label('name', trans('mensajes.name').':') !!}
     {!! Form::text('name', null, ['class' => 'form-control']) !!}
 </div>
 
 <div class="form-group">
-    {!! Form::label('apellido', trans('mensajes.apellido').':') !!}
+    {!! Form::label('apellido', trans('mensajes.last-name').':') !!}
     {!! Form::text('apellido', null, ['class' => 'form-control']) !!}
 </div>
 

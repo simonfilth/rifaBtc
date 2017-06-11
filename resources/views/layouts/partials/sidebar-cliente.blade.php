@@ -12,7 +12,7 @@
         @endif
         <div>{{ Auth::user()->name }}</div>
         <a class="btn btn-primary" href="{{ url('ver-usuario',Auth::user()->id) }}">
-            <i class="fa fa-user"></i> Mi Perfil
+            <i class="fa fa-user"></i> {{trans('mensajes.mi-perfil')}}
         </a>
       </div>
       <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
@@ -21,24 +21,28 @@
     
               <ul id="menu-content" class="menu-content collapse out">
 
-                  <li  data-toggle="collapse" data-target="#usuarios" class="collapsed">
-                    <a href="{{url('panel-cliente')}}"><i class="fa fa-home fa-lg"></i> Inicio</a> 
+                  <li>
+                    <a href="{{url('dashboard')}}"><i class="fa fa-home fa-lg"></i> {{trans('mensajes.inicio')}}</a> 
                   </li>
 
-                  <li  data-toggle="collapse" data-target="#usuarios" class="collapsed">
-                    <a href="{{url('/')}}"><i class="fa fa-gift fa-lg"></i> Premios</a> 
+                  <li>
+                    <a href="{{url('premios')}}"><i class="fa fa-gift fa-lg"></i> {{trans('mensajes.premios')}}</a> 
                   </li>
 
-                  <li  data-toggle="collapse" data-target="#usuarios" class="collapsed">
-                    <a href="{{url('unirse-a-sorteo')}}"><i class="fa fa-cube fa-lg"></i> Unirse a Sorteo</a> 
+                  <li>
+                    <a href="{{url('unirse-a-sorteo')}}"><i class="fa fa-cube fa-lg"></i> {{trans('mensajes.unirse-a-sorteo')}}</a> 
                   </li>
 
-                  <li  data-toggle="collapse" data-target="#usuarios" class="collapsed">
-                    <a href="{{url('mostrar-participantes')}}"><i class="fa fa-users fa-lg"></i> Participantes</a> 
+                  <li>
+                    <a href="{{url('mostrar-participantes')}}"><i class="fa fa-users fa-lg"></i> {{trans('mensajes.participantes')}}</a> 
                   </li>
 
-                  <li data-toggle="collapse" data-target="#citas" class="collapsed">
-                    <a href="#"><i class="fa fa-calendar fa-lg"></i> Calendario</a>
+                  <li>
+                    <a href="{{url('sorteo-en-vivo')}}"><i class="fa fa-video-camera fa-lg"></i> {{trans('mensajes.sorteo-en-vivo')}}</a> 
+                  </li>
+                  
+                  <li>
+                    <a href="#"><i class="fa fa-calendar fa-lg"></i> {{trans('mensajes.calendario')}}</a>
                   </li>
              
               </ul>

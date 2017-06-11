@@ -19,4 +19,5 @@
     {!! Html::style('components/css/table-responsive-sortable.css') !!}
     {!! Html::style('components/jquery-ui/jquery-ui.min.css') !!}
     {!! Html::script('components/js/vue.js') !!}
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
