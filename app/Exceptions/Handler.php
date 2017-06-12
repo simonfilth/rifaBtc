@@ -44,6 +44,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof \Illuminate\Session\TokenMismatchException) {
+            // return response()->view('/d', ['message' => 'custom message'], 500);
+            return redirect()->action('HomeController@index');
+        }
         return parent::render($request, $exception);
     }
 

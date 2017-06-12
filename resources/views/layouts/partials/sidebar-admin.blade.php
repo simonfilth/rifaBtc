@@ -22,33 +22,30 @@
               <ul id="menu-content" class="menu-content collapse out">
 
                   <li>
-                    <a href="{{url('/')}}"><i class="fa fa-home fa-lg"></i> {{trans('mensajes.home')}}</a> 
+                    <a class="btn-block" href="{{url('/')}}"><i class="fa fa-home fa-lg"></i> {{trans('mensajes.home')}}</a> 
                   </li>
 
                   <li>
-                    <a href="{{url('dashboard')}}"><i class="fa fa-dashboard fa-lg"></i> {{trans('mensajes.dashboard')}}</a> 
+                    <a class="btn-block" href="{{url('dashboard')}}"><i class="fa fa-dashboard fa-lg"></i> {{trans('mensajes.dashboard')}}</a> 
                   </li>
 
                   <li>
-                    <a href="{{url('mostrar-usuarios')}}"><i class="fa fa-users fa-lg"></i> {{trans('mensajes.usuarios')}}</a> 
+                    <a class="btn-block" href="{{url('mostrar-usuarios')}}"><i class="fa fa-users fa-lg"></i> {{trans('mensajes.usuarios')}}</a> 
                   </li>
                   <li>
-                    <a href="{{url('mostrar-sorteos')}}"><i class="fa fa-btc fa-lg"></i> {{trans('mensajes.sorteos')}}</a> 
-                  </li>
-
-                  <li>
-                    <a href="{{url('premios')}}"><i class="fa fa-gift fa-lg"></i> {{trans('mensajes.premios')}}</a> 
-                  </li>
-                  <li>
-                    <a href="#"><i class="fa fa-calendar fa-lg"></i> {{trans('mensajes.calendario')}}</a>
+                    <a class="btn-block" href="{{url('mostrar-sorteos')}}"><i class="fa fa-btc fa-lg"></i> {{trans('mensajes.sorteos')}}</a> 
                   </li>
 
                   <li>
-                    <a href="{{url('sorteo-en-vivo')}}"><i class="fa fa-video-camera fa-lg"></i> {{trans('mensajes.sorteo-en-vivo')}}</a> 
+                    <a class="btn-block" href="{{url('premios')}}"><i class="fa fa-gift fa-lg"></i> {{trans('mensajes.premios')}}</a> 
                   </li>
 
                   <li>
-                    <a href="{{url('jugar-ruleta')}}"><i class="fa fa-play fa-lg"></i> {{trans('mensajes.jugar-ruleta')}}</a>
+                    <a class="btn-block" href="{{url('sorteo-en-vivo')}}"><i class="fa fa-video-camera fa-lg"></i> {{trans('mensajes.sorteo-en-vivo')}}</a> 
+                  </li>
+
+                  <li>
+                    <a class="btn-block" href="{{url('jugar-ruleta')}}"><i class="fa fa-play fa-lg"></i> {{trans('mensajes.jugar-ruleta')}}</a>
                   </li>
              
               </ul>

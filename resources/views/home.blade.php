@@ -116,7 +116,7 @@ Home
 
 
 					<div class="col-xs-10 text-right menu-1">
-					<h5>	<ul>
+					<h5>	<ul >
 
 						@if (Auth::guest())
 							<li><a href="{{ route('register') }}">{{trans('mensajes.registrate')}}</a></li>
@@ -401,16 +401,16 @@ Home
 	{!! Html::script('cryptosorteo/js/bootstrap.min.js') !!}
 	<!-- Waypoints -->
 	{!! Html::script('cryptosorteo/js/jquery.waypoints.min.js') !!}
-
+{!! Html::script('cryptosorteo/js/jquery.stellar.min.js') !!}
 	{!! Html::script('cryptosorteo/js/jquery.easing.1.3.js') !!}
-	{!! Html::script('cryptosorteo/js/jquery.stellar.min.js') !!}
+	
 	{!! Html::script('cryptosorteo/js/owl.carousel.min.js') !!}
 
 	<!-- Main -->
 	{!! Html::script('cryptosorteo/js/main.js') !!}
 	
 	<!-- Smartsupp Live Chat script -->
-		<script type="text/javascript">
+		<!-- <script type="text/javascript">
 		var _smartsupp = _smartsupp || {};
 		_smartsupp.key = '8d905a47427c30952678dbe77fd65da2320ae69c';
 		_smartsupp.loginEmailControl = false;
@@ -420,6 +420,6 @@ Home
 			c.type='text/javascript';c.charset='utf-8';c.async=true;
 			c.src='//www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
 		})(document);
-		</script>
+		</script> -->
 	</body>
 </html>

@@ -40,7 +40,8 @@ class LoginController extends Controller
             return redirect('dashboard');
         }
         else{
-            return redirect()->action('HomeController@index');
+            // return redirect()->action('HomeController@index');
+            return redirect('dashboard');
         }
 
         return redirect()->action('HomeController@index');

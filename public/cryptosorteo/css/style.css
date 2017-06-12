@@ -1546,6 +1546,8 @@ h1, h2, h3, h4, h5, h6, figure {
   cursor: pointer;
   text-decoration: none;
 }
+
+
 .fh5co-nav-toggle.active i::before, .fh5co-nav-toggle.active i::after {
   background: #fff !important;
 }
@@ -1559,6 +1561,7 @@ h1, h2, h3, h4, h5, h6, figure {
   width: 25px;
   height: 2px;
   color: #252525;
+  /*color: white !important;*/
   font: bold 14px/.4 Helvetica;
   text-transform: uppercase;
   text-indent: -55px;
@@ -1572,14 +1575,16 @@ h1, h2, h3, h4, h5, h6, figure {
   background: #252525;
   position: absolute;
   left: 0;
+
   transition: all .2s ease-out;
 }
 .fh5co-nav-toggle.fh5co-nav-white > i {
-  color: #000;
-  background: #000;
+  color: #fff !important;
+  background: #fff;
 }
 .fh5co-nav-toggle.fh5co-nav-white > i::before, .fh5co-nav-toggle.fh5co-nav-white > i::after {
-  background: #000;
+  background: #fff;
+  color: #fff !important;
 }
 
 .fh5co-nav-toggle i::before {
@@ -1600,6 +1605,7 @@ h1, h2, h3, h4, h5, h6, figure {
 
 .fh5co-nav-toggle.active i {
   background: transparent;
+  /*background: white;*/
 }
 
 .fh5co-nav-toggle.active i::before {
