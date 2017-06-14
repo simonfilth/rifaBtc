@@ -25,7 +25,7 @@ class AdminController extends Controller
         else{
             $participantes = User::join('sorteos_usuarios as SU','SU.usuario_id','users.id')
             ->join('sorteos','sorteos.id','SU.sorteo_id')
-            ->where('SU.sorteo_id',$sorteo_en_curso->id)->get();
+            ->where([['SU.sorteo_id',$sorteo_en_curso->id],['SU.confirmar_pago',1]])->get();
             $dataParticipantes = $participantes->toArray();
  
         }

@@ -30,11 +30,11 @@
                   </li>
 
                   <li>
-                    <a class="btn-block" href="{{url('unirse-a-sorteo')}}"><i class="fa fa-cube fa-lg"></i> {{trans('mensajes.unirse-a-sorteo')}}</a> 
+                    <a class="btn-block" href="{{url('unirse-a-sorteo')}}"><i class="fa fa-cube fa-lg"></i> {{trans('mensajes.unirse-sorteo')}}</a> 
                   </li>
 
                   <li>
-                    <a class="btn-block" href="{{url('mostrar-participantes')}}"><i class="fa fa-users fa-lg"></i> {{trans('mensajes.participantes')}}</a> 
+                    <a class="btn-block" href="{{url('mostrar-participantes')}}"><i class="fa fa-users fa-lg"></i> {{trans('mensajes.lista-participantes')}}</a> 
                   </li>
 
                   <li>

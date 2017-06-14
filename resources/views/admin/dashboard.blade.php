@@ -44,17 +44,19 @@
         <div class="col-sm-12">
             <table id="table-responsive" class="table table-condensed table-striped sortable ">
                 <thead>
+                    <th>#</th>
                     <th>{{trans('mensajes.name')}}</th>
-                    <th>{{trans('mensajes.id-wallet')}}</th>
+                    <!-- <th>{{trans('mensajes.id-wallet')}}</th> -->
                     @if(Auth::user()->tipo_usuario == 'Administrador')
                     <th>{{trans('mensajes.id-transferencia')}}</th>
                     <th>{{trans('mensajes.confirmar-pago')}}</th>
                     @endif
                 </thead>
                 <tbody>
-                    <tr v-for="participante in participantes">   
+                    <tr v-for="(participante,i) in participantes">   
+                        <td>@{{i+1}}</td>
                         <td>@{{participante.name}} @{{participante.apellido}}</td>
-                        <td>@{{participante.id_wallet}}</td>
+                        <!-- <td>@{{participante.id_wallet}}</td> -->
                     @if(Auth::user()->tipo_usuario == 'Administrador')
                         <td>@{{participante.id_transferencia}}</td>
                         <td v-if="participante.confirmar_pago == 0"><a class="btn btn-primary" :href="'confirmar-pago/'+participante.id_transferencia">{{trans('mensajes.confirmar-pago')}}</a></td>

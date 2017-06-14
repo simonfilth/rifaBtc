@@ -166,9 +166,9 @@ Home
 						<span>
 							{!! Html::image('cryptosorteo/images/numero1.png', 'Numero 1', array('class' => 'img-responsive')) !!}
 						</span>
-						<h3>Registrate</h3>
-						<p>Solo debes ingresar tus datos para registrarte en nuestro sistema</p>
-						<p><a href="#" class="btn btn-primary btn-outline btn-sm">Registrarme <i class=""></i></a></p>
+						<h3>{{trans('mensajes.registrate')}}</h3>
+						<p>{{trans('mensajes.solo-debes-ingresar')}}</p>
+						<p><a href="{{ route('register') }}" class="btn btn-primary btn-outline btn-sm">{{trans('mensajes.registrarme')}} <i class=""></i></a></p>
 					</div>
 				</div>
 				<div class="col-md-4 text-center animate-box">
@@ -176,9 +176,9 @@ Home
 						<span>
 							{!! Html::image('cryptosorteo/images/numero2.png', 'Numero 2', array('class' => 'img-responsive')) !!}
 						</span>
-						<h3>Participa</h3>
-						<p>Una vez registrado, podras acceder a tu panel adminstrativo donde podras entrar al sorteo</p>
-						<p><a href="#" class="btn btn-primary btn-outline btn-sm" data-toggle="modal" data-target="#participar" > ¿Como participar? <i class=""></i></a></p>
+						<h3>{{trans('mensajes.participa')}}</h3>
+						<p>{{trans('mensajes.una-vez-registrado')}}</p>
+						<p><a href="#" class="btn btn-primary btn-outline btn-sm" data-toggle="modal" data-target="#participar" > {{trans('mensajes.como-participar')}} <i class=""></i></a></p>
 					</div>
 				</div>
 				<div class="col-md-4 text-center animate-box">
@@ -186,9 +186,9 @@ Home
 						<span>
 							{!! Html::image('cryptosorteo/images/numero3.png', 'Numero 3', array('class' => 'img-responsive')) !!}
 						</span>
-						<h3>Juega</h3>
-						<p>Cuando estes participando, deberas esperar el momento que se llenen la cantidad de 50 jugadores y se estara avisando el momento en que se realizará el sorteo en vivo</p>
-						<p><a href="#" class="btn btn-primary btn-outline btn-sm" data-toggle="modal" data-target="#comoJugar" >¿Como jugar? <i class=""></i></a></p>
+						<h3>{{trans('mensajes.juega')}}</h3>
+						<p>{{trans('mensajes.cuando-estes-participando')}}</p>
+						<p><a href="#" class="btn btn-primary btn-outline btn-sm" data-toggle="modal" data-target="#comoJugar" >{{trans('mensajes.como-jugar')}}  <i class=""></i></a></p>
 					</div>
 				</div>
 			</div>
@@ -223,18 +223,18 @@ Home
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<center>
-							<h3 class="modal-title heading-primary center" id="comoJugar">Como Jugar</h3>
+							<h3 class="modal-title heading-primary center" id="comoJugar">{{trans('mensajes.como-jugar')}}</h3>
 						<center>
 				</div>
 				<div class="modal-body text-justify">
 					<p>
 						<center>
-							<h4>Una vez realizada la compra de boleto usted debera seguir las siguientes instrucciones:</h4>
+							<h4>{{trans('mensajes.como-jugar-1')}}</h4>
 						</center>
 						<ol>
-							<li>Debe dirigirse a la seccion "Sorteo en vivo".</li>
-							<li>Alli podra visaualizar la cantidad de participantes inscrito para lanzar la ruleta.</li>
-							<li>Cuando se complete los 50 jugadores, se enviará una notificacion para tirar la ruleta, esta sera en vivo. De no estar presente podra visualizar la lista de ganadores, en la seccion de ganadores.</li>
+							<li>{{trans('mensajes.como-jugar-2')}}</li>
+							<li>{{trans('mensajes.como-jugar-3')}}</li>
+							<li>{{trans('mensajes.como-jugar-4')}}</li>
 						</ol>
 					</p>
 				</div>
@@ -253,26 +253,26 @@ Home
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<center>
-							<h3 class="modal-title heading-primary center" id="participar">¿Como participar?</h3>
+							<h3 class="modal-title heading-primary center" id="participar">{{trans('mensajes.como-participar')}}</h3>
 						</center>
 					</div>
 					<div class="modal-body text-justify">
 						<p>
 							<ol>
-								<center>
-									<h4>Una vez registrado en nuestro sitio web debes realizar los siguientes pasos:</h4>
-								</center>
+	                            <center>
+	                                <h4>{{trans('mensajes.como-participar-1')}}</h4>
+	                            </center>
 
-								<li>Debes Comprar tu boleto o rifa desde tu wallet por el valor de 0.01 BTC enviandolo a la siguiente direccion: </li>
-								 <center>
-								 	{!! Html::image('cryptosorteo/images/direccionbtc.png', 'Dirección BTC', array('height' => '100', 'width' => '100')) !!}
-								 </center>
-								 <center> <ul>16ZTktG2PaimUeMv7NeRwfWrWjeyarMgDE</ul> </center>
+	                            <li>{{trans('mensajes.como-participar-2')}}</li>
+	                             <center>
+	                                {!! Html::image('cryptosorteo/images/direccionbtc.png', 'Dirección BTC', array('height' => '100', 'width' => '100')) !!}
+	                             </center>
+	                             <center> <ul>16ZTktG2PaimUeMv7NeRwfWrWjeyarMgDE</ul> </center>
 
-								<li>Una vez iniciada la sesion en nuestro sitio web, debes dirigirte a "Unirse a Sorteo". </li>
-								<li>En esta sesion debes colocar el ID de la transferencia realizada.</li>
-								<li>Una vez confirmada la trasferencia, automanticamente entra a la base de datos de participantes.</li>
-							</ol>
+	                            <li>{{trans('mensajes.como-participar-3')}}</li>
+	                            <li>{{trans('mensajes.como-participar-4')}}</li>
+	                            <li>{{trans('mensajes.como-participar-5')}}</li>
+	                        </ol>
 						</p>
 					</div>
 				</div>

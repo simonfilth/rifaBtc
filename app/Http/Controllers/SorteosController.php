@@ -144,8 +144,9 @@ class SorteosController extends Controller
         $sorteos = SorteoUsuario::where([['sorteos_usuarios.sorteo_id',$sorteo->id],['sorteos_usuarios.usuario_id',Auth::user()->id]])
             ->join('sorteos','sorteos.id','sorteos_usuarios.sorteo_id')
             ->get();
-       
-        return \View::make('sorteos.unirse-a-sorteo',compact('sorteo','sorteos'));
+        $precio_por_persona = $sorteo->precio_sorteo/50;
+
+        return \View::make('sorteos.unirse-a-sorteo',compact('sorteo','sorteos','precio_por_persona'));
     }
 
     public function guardarUnionSorteo(TransferenciasRequest $request,$id)
@@ -184,8 +185,8 @@ class SorteosController extends Controller
             ->join('sorteos','sorteos.id','sorteos_usuarios.sorteo_id')
             ->paginate(15);
         }
-        
-        return \View::make('sorteos.mostrar-participantes',compact('sorteos_usuarios','sorteo'));
+        $premio_total = $sorteo->precio_sorteo*0.8;
+        return \View::make('sorteos.mostrar-participantes',compact('sorteos_usuarios','sorteo','premio_total'));
     }
 
     public function confirmarPago($id)

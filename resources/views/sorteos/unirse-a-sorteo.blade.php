@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">
-                {{trans('mensajes.unirse-a-sorteo')}}
+                {{trans('mensajes.unirse-sorteo')}}
                 <small>{{$sorteo->fecha_sorteo}}</small>
             </h1>
             <!-- <ol class="breadcrumb">
@@ -25,18 +25,18 @@
                     <p>
                         <ol>
                             <center>
-                                <h4>Una vez registrado en nuestro sitio web debes realizar los siguientes pasos:</h4>
+                                <h4>{{trans('mensajes.como-participar-1')}}</h4>
                             </center>
 
-                            <li>Debes Comprar tu boleto o rifa desde tu wallet por el valor de 0.01 BTC enviandolo a la siguiente direccion: </li>
+                            <li>{{trans('mensajes.como-participar-2')}}</li>
                              <center>
                                 {!! Html::image('cryptosorteo/images/direccionbtc.png', 'Dirección BTC', array('height' => '100', 'width' => '100')) !!}
                              </center>
                              <center> <ul>16ZTktG2PaimUeMv7NeRwfWrWjeyarMgDE</ul> </center>
 
-                            <li>Una vez iniciada la sesion en nuestro sitio web, debes dirigirte a "Unirse a Sorteo". </li>
-                            <li>En esta sesion debes colocar el ID de la transferencia realizada.</li>
-                            <li>Una vez confirmada la trasferencia, automanticamente entra a la base de datos de participantes.</li>
+                            <li>{{trans('mensajes.como-participar-3')}}</li>
+                            <li>{{trans('mensajes.como-participar-4')}}</li>
+                            <li>{{trans('mensajes.como-participar-5')}}</li>
                         </ol>
                     </p>
                 </div>
@@ -54,7 +54,7 @@
                     <div class="panel-body">
                         <!-- <p><i class="fa fa-calendar"></i> {{$sorteo->fecha_sorteo}}</p> -->
                         <!-- <p><i class="fa fa-clock-o"></i> {{$sorteo->hora_sorteo}}</p> -->
-                        <p><i class="fa fa-money"></i> {{trans('mensajes.precio-sorteo')}} {{$sorteo->precio_sorteo}}</p>
+                        <p><i class="fa fa-money"></i> {{trans('mensajes.precio-sorteo')}} {{$precio_por_persona}} <i class="fa fa-btc"></i> </p> 
                         @include('errors.errors')
 
                         {!! Form::open(['url' =>['guardar-union-sorteo',$sorteo->id], 'method' => 'POST']) !!}

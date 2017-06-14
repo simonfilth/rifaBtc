@@ -6,9 +6,14 @@
         <div class="col-lg-12">
         	<h1 class="page-header">{{trans('mensajes.participantes')}}</h1>
         		<!-- <h3>Datos de sorteo</h3> -->
-	        	<p>Fecha: {!!$sorteo->fecha_sorteo!!}</p>
-	            <p>Hora: {!!$sorteo->hora_sorteo!!}</p>
-	            <p>Precio: {!!$sorteo->precio_sorteo!!}</p>
+                @if($sorteo->fecha_sorteo!=null)
+                    <p>Fecha: {!!$sorteo->fecha_sorteo!!}</p>
+                @endif
+                @if($sorteo->fecha_sorteo!=null)
+                    <p>Hora: {!!$sorteo->hora_sorteo!!}</p>
+                @endif
+                <p><i class="fa fa-money"></i> {{trans('mensajes.premio')}}: {{$premio_total}}  <i class="fa fa-btc"></i> </p>
+	            
 
             
             <!-- <ol class="breadcrumb">
@@ -48,6 +53,7 @@
         			<!-- <div class="col-lg-6"> -->
 		                <table id="table-responsive" class="table table-condensed table-striped sortable ">
 		                    <thead>
+                                <th>#</th>
 		                        <th>{{trans('mensajes.name')}}</th>
 		                        <th>{{trans('mensajes.last-name')}}</th>
 		                        @if(Auth::user()->tipo_usuario == 'Administrador')
@@ -56,8 +62,9 @@
 		                        @endif
 		                    </thead>
 		                    <tbody>
-		                        @forelse($sorteos_usuarios as $sorteo)
+		                        @forelse($sorteos_usuarios as $i => $sorteo)
 		                        <tr>
+                                    <td>{!!$i+1!!}</td>
 		                            <td>{!!$sorteo->name!!}</td>
 		                            <td>{!!$sorteo->apellido!!}</td>
 		                        @if(Auth::user()->tipo_usuario == 'Administrador')
