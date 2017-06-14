@@ -127,6 +127,8 @@ return [
     'como-jugar-2'=>'Debe dirigirse a la seccion "Sorteo en vivo".',
     'como-jugar-3'=>'Alli podra visaualizar la cantidad de participantes inscrito para lanzar la ruleta.',
     'como-jugar-4'=>'Cuando se complete los 50 jugadores, se enviará una notificacion para tirar la ruleta, esta sera en vivo. De no estar presente podra visualizar la lista de ganadores, en la seccion de ganadores.',
-    'como-jugar-5'=>'',
+    'activo-inactivo'=>'Activo/Inactivo',
+    'activo'=>'Activo',
+    'inactivo'=>'Inactivo',
 
 ];

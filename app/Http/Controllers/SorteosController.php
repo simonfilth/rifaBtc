@@ -7,6 +7,7 @@ use App\Http\Requests\sorteosRequest;
 use App\Http\Requests\TransferenciasRequest;
 use App\modelos\Sorteo;
 use App\modelos\SorteoUsuario;
+use App\modelos\SorteoEnCurso;
 use Carbon\Carbon;
 use App\User;
 use Auth;
@@ -54,6 +55,20 @@ class SorteosController extends Controller
                 'to' => $sorteos->lastItem(),
             ],
             'data' => $sorteos,
+        ];
+
+        return response()->json($response);
+        // return response()->json($sorteos);
+    }
+
+    public function cargarSorteoEnCurso()
+    {
+        // $sorteos = Sorteo::all()->toArray();
+        $sorteo_en_curso = SorteoEnCurso::first();
+        // $sorteos = Sorteo::latest()->paginate(10);
+// dd($sorteos);
+        $response = [
+            'data' => $sorteo_en_curso,
         ];
 
         return response()->json($response);
@@ -131,8 +146,9 @@ class SorteosController extends Controller
 
     public function unirseSorteo()
     {
+        $sorteo_en_curso = SorteoEnCurso::first();
+        $sorteo = Sorteo::where('id',$sorteo_en_curso->sorteo_id)->first();
         
-        $sorteo = Sorteo::where('estado_sorteo','En Curso')->first();
         // dd($sorteo);
         if ($sorteo==null) {
             if(Auth::user()->tipo_usuario=='Cliente'){
@@ -174,16 +190,26 @@ class SorteosController extends Controller
             $sorteo = Sorteo::find($id);
         }
         else{
-            $sorteo = Sorteo::where('estado_sorteo','En Curso')->first();
+            $sorteo_en_curso = SorteoEnCurso::first();
+            $sorteo = Sorteo::where('id',$sorteo_en_curso->sorteo_id)->first();
             if ($sorteo==null) {
                 if(Auth::user()->tipo_usuario=='Cliente'){
                     return redirect()->action('ClientesController@panelCliente')->with('message','No hay sorteos en este momento');
                 }
             }
-            $sorteos_usuarios = SorteoUsuario::where('sorteos_usuarios.sorteo_id',$sorteo->id)
-            ->join('users','users.id','sorteos_usuarios.usuario_id')
-            ->join('sorteos','sorteos.id','sorteos_usuarios.sorteo_id')
-            ->paginate(15);
+            if (Auth::user()->tipo_usuario=="Administrador") {
+                $sorteos_usuarios = SorteoUsuario::where('sorteos_usuarios.sorteo_id',$sorteo->id)
+                ->join('users','users.id','sorteos_usuarios.usuario_id')
+                ->join('sorteos','sorteos.id','sorteos_usuarios.sorteo_id')
+                ->paginate(15);
+               
+            }
+            else{
+                $sorteos_usuarios = SorteoUsuario::where([['sorteos_usuarios.sorteo_id',$sorteo->id],['sorteos_usuarios.confirmar_pago',1]])
+                ->join('users','users.id','sorteos_usuarios.usuario_id')
+                ->join('sorteos','sorteos.id','sorteos_usuarios.sorteo_id')
+                ->paginate(15);
+            }
         }
         $premio_total = $sorteo->precio_sorteo*0.8;
         return \View::make('sorteos.mostrar-participantes',compact('sorteos_usuarios','sorteo','premio_total'));
@@ -242,7 +268,8 @@ class SorteosController extends Controller
 
     public function premios()
     {
-        $sorteo = Sorteo::where('estado_sorteo','En Curso')->first();
+        $sorteo_en_curso = SorteoEnCurso::first();
+        $sorteo = Sorteo::where('id',$sorteo_en_curso->sorteo_id)->first();
         if($sorteo==null){
             if(Auth::user()->tipo_usuario=='Cliente'){
                 return redirect()->action('AdminController@dashboard')->with("message",'No hay sorteos todavía');

@@ -83,6 +83,7 @@
                         <th>{{trans('mensajes.accion')}}</th>
                         <th>{{trans('mensajes.estado')}}</th>
                         <th>{{trans('mensajes.comenzar-terminar')}}</th>
+                        <th>{{trans('mensajes.activo-inactivo')}}</th>
                     </thead>
                     <tbody>
                     <template v-for="sorteo in sorteos">
@@ -98,23 +99,33 @@
                             <td>@{{sorteo.estado_sorteo}}</td>
                             <template v-if="sorteo.estado_sorteo=='No realizado'">
                                 <td>
-                                    <a class="btn btn-success" @click.prevent="comenzarSorteo(sorteo)">
+                                    <a class="btn btn-success btn-block" @click.prevent="comenzarSorteo(sorteo)">
                                         {{trans('mensajes.comenzar')}}
                                     </a>
                                 </td>
                             </template>
                             <template v-else-if="sorteo.estado_sorteo=='En Curso'">
                                 <td>
-                                    <a class="btn btn-danger" @click.prevent="terminarSorteo(sorteo)">
+                                    <a class="btn btn-danger btn-block" @click.prevent="terminarSorteo(sorteo)">
                                         {{trans('mensajes.terminar')}}
                                     </a>
                                 </td>
                             </template>
                             <template v-else>
                                 <td>
-                                    <a class="btn btn-warning" @click.prevent="sorteoNoRealizado(sorteo)">
+                                    <a class="btn btn-warning btn-block" @click.prevent="sorteoNoRealizado(sorteo)">
                                         {{trans('mensajes.no-realizado')}}
                                     </a>
+                                </td>
+                            </template>
+                            <template v-if="sorteo.id==sorteo_en_curso">
+                                <td>              
+                                    {{trans('mensajes.activo')}}
+                                </td>
+                            </template>
+                            <template v-else>
+                                <td>              
+                                    {{trans('mensajes.inactivo')}}
                                 </td>
                             </template>
                         </tr>
@@ -131,9 +142,9 @@
                 </table>
                 
                 @include('layouts.partials.pagination')
-                <!--<pre>
-                    @ { { $ data }}  
-                </pre>-->
+                <!-- <pre>
+                    @ { { $data }}  
+                </pre> -->
 
             </div>
         </div>
@@ -150,6 +161,7 @@ const app = new Vue({
         el: "#app",
        data: {
              sorteos : [],
+             sorteo_en_curso : '',
             pagination: {
                 total: 0,
                 per_page: 2,
@@ -189,6 +201,7 @@ const app = new Vue({
         mounted() {
             // this.getVueSorteos();
             this.getVueSorteos(this.pagination.current_page);
+            this.getVueSorteoEnCurso();
             // axios.get('cargar-sorteos').then(response => {this.sorteos = response.data})
             
         },
@@ -207,30 +220,20 @@ const app = new Vue({
                     })
                 });
             },
-            /*getVueSorteos: function() {
-                axios.get('cargar-sorteos').then(function (response) {
-                    this.sorteos = response.data;
-                    this.pagination = response.data.pagination;
+            getVueSorteoEnCurso: function() {
+                axios.get('cargar-sorteo-en-curso').then(function (response) {
+                    
 
-                    console.log("sorteos");
-                    console.log(response.data);
-                    console.log(this.sorteos);
-                    var i=0;
+                    
                     app.$nextTick(function() {
-                        $('[data-toggle="popover"]').popover();
-                        var temp;
-                        for (var i = 0; i < response.data.length ; i++) {
-                            temp= response.data[i];
-                            console.log(response.data[i]);
-                        }
-                        this.sorteos = temp;
-                        alert("hola");
-                        this.sorteos = response.data.data.data;
-
-
+                        
+                        this.sorteo_en_curso = response.data.data.sorteo_id;;
+                        console.log("sorteos en curso");
+                        console.log(response.data);
+                        console.log(this.sorteo_en_curso);
                     })
                 });
-            }*/
+            },
             
             changePage: function(page) {
                 this.pagination.current_page = page;
@@ -276,7 +279,7 @@ const app = new Vue({
                     console.log(response);
                     app.getVueSorteos();
                 })
-            },
+            }
         }
      });
 

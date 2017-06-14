@@ -55,6 +55,7 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::post('guardar-sorteo-en-curso', 'SorteosController@guardarSorteoEnCurso');
 
 		Route::get('cargar-sorteos', 'SorteosController@cargarSorteos');
+		Route::get('cargar-sorteo-en-curso', 'SorteosController@cargarSorteoEnCurso');
 		Route::get('cargar-datos-dashboard', 'AdminController@cargarDatosDashboard');
 		Route::get('cargar-datos-ganadores', 'AdminController@cargarDatosGanadores');
 		Route::post('comenzar-sorteo-en-curso/{id}', 'SorteosController@comenzarSorteoEnCurso');
