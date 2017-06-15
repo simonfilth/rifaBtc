@@ -3,6 +3,10 @@
 @ section('content')
 Home
 @ endsection -->
+@php
+	$sorteo =  App\modelos\SorteoEnCurso::join('sorteos','sorteos.id','sorteos_en_curso.sorteo_id')->first();
+	$acumulado = $sorteo->precio_sorteo*0.80;
+@endphp
 @if(Auth::check())
 @php
   $perfil = App\User::join('otros_datos_usuario','otros_datos_usuario.usuario_id','users.id')
@@ -51,7 +55,8 @@ Home
 					<div class="col-xs-6 text-left">
 						<p style="color:white;">
 							{!! Html::image('cryptosorteo/images/ACUMULADO.png', 'Acumulado', array('height' => '50', 'width' => '220')) !!}
-							0.012345670 BTC
+							
+							{!!$acumulado!!} <i class="fa fa-btc"></i>
 						</p>
 					</div>
 					<div class="col-xs-3 text-right">
@@ -288,21 +293,21 @@ Home
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<center>
-							<h3 class="modal-title heading-primary center" id="premios">¿Cuales Son los Premios?</h3>
+							<h3 class="modal-title heading-primary center" id="premios">{{trans('mensajes.cuales-son-los-premios')}}</h3>
 						</center>
 					</div>
 					<div class="modal-body text-justify">
 						<p>
-							<h5>Por cada ruleta tirada de 50 jugadores, existiran 3 ganadores </h5>
+							<h5>{{trans('mensajes.cuales-son-los-premios-1')}}</h5>
 							<ol>
-								<li> El primer ganador se ganara el 50% del valor acumulado</li>
-								<li>El segundo ganador se ganara el 20% del valor acumulado</li>
-								<li>El tercerganador se ganara el 10% del valor acumulado</li>
+								<li>{{trans('mensajes.cuales-son-los-premios-2')}}</li>
+								<li>{{trans('mensajes.cuales-son-los-premios-3')}}</li>
+								<li>{{trans('mensajes.cuales-son-los-premios-4')}}</li>
 
 						    </ol>
-							<h4> ¿3 ganadores? </h4>
+							<h4>{{trans('mensajes.cuales-son-los-premios-5')}}</h4>
 						</p>
-						<h5> Si, 3 ganadores para aumentar las probabilidades de ganancia de cada jugador </h5>
+						<h5>{{trans('mensajes.cuales-son-los-premios-6')}}</h5>
 					</div>
 				</div>
 			</div>
@@ -319,26 +324,26 @@ Home
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<center>
-							<h3 class="modal-title heading-primary center" id="comoFunciona">¿Como Funciona?</h3>
+							<h3 class="modal-title heading-primary center" id="comoFunciona">{{trans('mensajes.cuales-son-los-premios')}}</h3>
 						</center>
 					</div>
 					<div class="modal-body text-justify">
 						<p>
-							<h4>Cuando el jugador realiza el pago y es verificado, entra en nuestra base de datos y automaticamente esta participando. </h4>
+							<h4>{{trans('mensajes.cuales-son-los-premios-1')}}</h4>
 							</br>
-							<h4>Cada participante podra ver su nombre en la lista de participantes al momento de ser agregado al sorteo.</h4>
+							<h4>{{trans('mensajes.cuales-son-los-premios-2')}}</h4>
 							</br>
 							<center>
 								{!! Html::image('cryptosorteo/images/fotosorteo1.png', 'Ejemplo 1 Sorteo', array('class' => 'img-responsive')) !!}
 							</center>
 							</br></br>
-							<h4>A cada participante se le asiganara un color para el momento de tirar la ruleta  ("CADA COLOR ES UNICO").</h4>
+							<h4>{{trans('mensajes.cuales-son-los-premios-3')}}</h4>
 							</br>
 							<center>
 								{!! Html::image('cryptosorteo/images/fotosorteo2.png', 'Ejemplo 2 Sorteo', array('class' => 'img-responsive')) !!}
 							</center>
 							</br></br>
-							<h4>En el momento que la ruleta termine de girar automaticamente saldrá el nombre del ganador.</h4>
+							<h4>{{trans('mensajes.cuales-son-los-premios-4')}}</h4>
 							</br>
 							<center>
 								{!! Html::image('cryptosorteo/images/fotosorteo3.png', 'Ejemplo 3 Sorteo', array('class' => 'img-responsive')) !!}

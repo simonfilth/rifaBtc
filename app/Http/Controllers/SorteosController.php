@@ -212,7 +212,7 @@ class SorteosController extends Controller
                 ->paginate(15);
             }
         }
-        $premio_total = $sorteo->precio_sorteo*0.8;
+        $premio_total = $sorteo->precio_sorteo*0.80;
         return \View::make('sorteos.mostrar-participantes',compact('sorteos_usuarios','sorteo','premio_total'));
     }
 
@@ -278,9 +278,9 @@ class SorteosController extends Controller
             return redirect()->action('SorteosController@agregarSorteo')->with("message",'Debe agregar un sorteo primero');
         }
         $sorteo = Sorteo::where('id',$sorteo_en_curso->sorteo_id)->first();
-        $total = $sorteo->precio_sorteo;
-        $primero = $total*0.50;
-        $segundo = $total*0.20;
+        $total = $sorteo->precio_sorteo*0.80;
+        $primero = $total*0.60;
+        $segundo = $total*0.30;
         $tercero = $total*0.10;
         return \View::make('sorteos.premios',compact('sorteo','primero','segundo','tercero','total'));
     }
@@ -340,12 +340,12 @@ class SorteosController extends Controller
             $sorteo_usuario->estado_ganador=1;
             $sorteo_usuario->save();
             $sorteo = Sorteo::find($sorteo_usuario->sorteo_id);
-            $pago= $sorteo->precio_sorteo;
+            $pago= $sorteo->precio_sorteo*0.80;
             if($lugar==1){
-                $pago = $pago*0.50;
+                $pago = $pago*0.60;
             }
             elseif($lugar==2){
-                $pago = $pago*0.20;
+                $pago = $pago*0.30;
             }
             else{
                 $pago = $pago*0.10;
@@ -366,12 +366,12 @@ class SorteosController extends Controller
         $sorteo_usuario->save();
 
         $sorteo = Sorteo::find($sorteo_usuario->sorteo_id);
-        $pago= $sorteo->precio_sorteo;
+        $pago= $sorteo->precio_sorteo*0.80;
         if($lugar==1){
-            $pago = $pago*0.50;
+            $pago = $pago*0.60;
         }
         elseif($lugar==2){
-            $pago = $pago*0.20;
+            $pago = $pago*0.30;
         }
         else{
             $pago = $pago*0.10;
@@ -414,12 +414,12 @@ class SorteosController extends Controller
         // dd(Ganador::where('sorteo_usuario_id',$sorteo_usuario_id)->first());
         $ganador = Ganador::where('sorteo_usuario_id',$sorteo_usuario_id)->first();
         $sorteo = Sorteo::join('sorteos_usuarios as SU','SU.sorteo_id','sorteos.id')->where('SU.id',$sorteo_usuario_id)->first();
-        $pago= $sorteo->precio_sorteo;
+        $pago= $sorteo->precio_sorteo*0.80;
         if($lugar==1){
-            $pago = $pago*0.50;
+            $pago = $pago*0.60;
         }
         elseif($lugar==2){
-            $pago = $pago*0.20;
+            $pago = $pago*0.30;
         }
         else{
             $pago = $pago*0.10;
