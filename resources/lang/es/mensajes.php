@@ -129,8 +129,12 @@ return [
     'como-jugar-4'=>'Cuando se complete los 50 jugadores, se enviará una notificacion para tirar la ruleta, esta sera en vivo. De no estar presente podra visualizar la lista de ganadores, en la seccion de ganadores.',
     'activo-inactivo'=>'Activo/Inactivo',
     'activo'=>'Activo',
+    'activar'=>'Activar',
     'inactivo'=>'Inactivo',
     'asignar-ganadores'=>'Asignar Ganadores',
     'elegir'=>'Elegir',
+    'puesto'=>'Puesto',
+    'todavia-no-hay-sorteos'=>'Todavía no hay sorteos',
+    'no-unido-sorteo'=>'Todavía no se ha unido al sorteos',
 
 ];

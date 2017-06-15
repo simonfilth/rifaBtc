@@ -35,40 +35,47 @@
                     <th>{{trans('mensajes.elegir')}}</th>
                 </thead>
                 <tbody>
-                    <tr v-for="(participante,i) in participantes">   
-                        <td>@{{i+1}}</td>
-                        <td>@{{participante.name}} @{{participante.apellido}}</td>
-                        <td>@{{participante.id_transferencia}}</td>
+                @forelse($participantes as $i => $participante)
+                    <tr>   
+                        <td>{{$i+1}}</td>
+                        <td>{{$participante->name}} {{$participante->apellido}}</td>
+                        <td>{{$participante->id_transferencia}}</td>
                         <td>
-                        @forelse($consulta_ganadores as $consulta)
-                        	@if($consulta->lugar==1)
-                        		<a class="btn btn-warning" :href="'cambiar-premio/'+{{$consulta->id}}+'/'+participante.usuario_id+'/1'" disabled>1</a>
-                        		<a class="btn btn-primary" :href="'cambiar-premio/'+{{$consulta->id}}+'/'+participante.usuario_id+'/2'">2</a>
-	                        	<a class="btn btn-danger" :href="'cambiar-premio/'+{{$consulta->id}}+'/'+participante.usuario_id+'/3'">3</a>
-	                        @elseif($consulta->lugar==2)
-                        		<a class="btn btn-warning" :href="'cambiar-premio/'+{{$consulta->id}}+'/'+participante.usuario_id+'/1'">1</a>
-                        		<a class="btn btn-primary" :href="'cambiar-premio/'+{{$consulta->id}}+'/'+participante.usuario_id+'/2'" disabled>2</a>
-	                        	<a class="btn btn-danger" :href="'cambiar-premio/'+{{$consulta->id}}+'/'+participante.usuario_id+'/3'">3</a>
-	                        @elseif($consulta->lugar==3)
-                        		<a class="btn btn-warning" :href="'cambiar-premio/'+{{$consulta->id}}+'/'+participante.usuario_id+'/1'">1</a>
-                        		<a class="btn btn-primary" :href="'cambiar-premio/'+{{$consulta->id}}+'/'+participante.usuario_id+'/2'">2</a>
-	                        	<a class="btn btn-danger" :href="'cambiar-premio/'+{{$consulta->id}}+'/'+participante.usuario_id+'/3'" disabled>3</a>
-                        	@endif
-                        @empty
-                        	<a class="btn btn-warning" :href="'asignar-premio/'+participante.sorteo_id+'/'+participante.usuario_id+'/1'">1</a>
-	                        <a class="btn btn-primary" :href="'asignar-premio/'+participante.sorteo_id+'/'+participante.usuario_id+'/2'">2</a>
-	                        <a class="btn btn-danger" :href="'asignar-premio/'+participante.sorteo_id+'/'+participante.usuario_id+'/3'">3</a>
-                        @endforelse
                         
+                            @if($participante->estado_ganador==1)
+                                @php
+                                    $consulta = App\modelos\Ganador::where('sorteo_usuario_id',$participante->id_su)->first();
+                                @endphp
+                                @if($consulta->lugar==1)
+                                    <a class="btn btn-warning" href="{{url('cambiar-premio',[$consulta->id,$participante->id_su,'1'])}}" disabled>1</a>
+                                    <a class="btn btn-primary" href="{{url('cambiar-premio',[$consulta->id,$participante->id_su,'2'])}}">2</a>
+                                    <a class="btn btn-danger" href="{{url('cambiar-premio',[$consulta->id,$participante->id_su,'3'])}}">3</a>
+                                
+                                @elseif($consulta->lugar==2)
+                                    <a class="btn btn-warning" href="{{url('cambiar-premio',[$consulta->id,$participante->id_su,'1'])}}">1</a>
+                                    <a class="btn btn-primary" href="{{url('cambiar-premio',[$consulta->id,$participante->id_su,'2'])}}" disabled>2</a>
+                                    <a class="btn btn-danger" href="{{url('cambiar-premio',[$consulta->id,$participante->id_su,'3'])}}">3</a>
+                               
+                                @elseif($consulta->lugar==3)
+                                    <a class="btn btn-warning" href="{{url('cambiar-premio',[$consulta->id,$participante->id_su,'1'])}}">1</a>
+                                    <a class="btn btn-primary" href="{{url('cambiar-premio',[$consulta->id,$participante->id_su,'2'])}}">2</a>
+                                    <a class="btn btn-danger" href="{{url('cambiar-premio',[$consulta->id,$participante->id_su,'3'])}}" disabled>3</a>
+                                @endif
+                            @else
+                                <a class="btn btn-warning" href="{{url('asignar-premio',[$participante->id_su,'1'])}}">1</a>
+                                <a class="btn btn-primary" href="{{url('asignar-premio',[$participante->id_su,'2'])}}">2</a>
+                                <a class="btn btn-danger" href="{{url('asignar-premio',[$participante->id_su,'3'])}}">3</a>  
+                            @endif      
                         </td>
                     </tr>
+                @empty
+                	<tr>
+                		<td colspan="4" align="center">
+                            {{trans('mensajes.todavia-no-hay-participantes')}}
+                        </td>
+                    </tr>
+				@endforelse
 
-                    <template v-if="participantes.length == 0">
-                            <td colspan="4" align="center">
-                                {{trans('mensajes.todavia-no-hay-participantes')}}
-                            </td>
-                        </tr>
-                    </template>
                 </tbody>
             </table>
         </div>
@@ -86,10 +93,8 @@
 </div>
 
 <script type="text/javascript">
+/*
 
-window.Laravel = <?php echo json_encode([
-        'csrfToken' => csrf_token(),
-    ]); ?>
 
 var dataParticipantes = {!! $dataParticipantes !!};
 
@@ -100,15 +105,14 @@ var dataParticipantes = {!! $dataParticipantes !!};
         },
         methods: {
         	asignarPremio: function(participantes,lugar) {
-        		// console.log(participantes);
-        		// console.log(lugar);
+
                 axios.post('asignar-premio/'+participantes.sorteo_id+'/'+participantes.sorteo_id+'/'+lugar).then(function (response) {
                     console.log("respuesta ganador");
                     console.log(response.data);
-                    // vm.getVueSorteos();
+         
                 })
             }
         }
-     });
+     });*/
  </script>
 @endsection

@@ -8,6 +8,8 @@ use App\Http\Requests\UpdateUserRequest;
 use App\User;
 use App\modelos\OtroDatoUsuario;
 use App\modelos\Sorteo;
+use App\modelos\SorteoEnCurso;
+use App\modelos\Ganador;
 use Carbon\Carbon;
 use Auth;
 
@@ -15,7 +17,7 @@ class AdminController extends Controller
 {
     public function dashboard(Request $request)
     {
-        $sorteo_en_curso = Sorteo::where('estado_sorteo','En Curso')->first();
+        $sorteo_en_curso = SorteoEnCurso::first();
         if($sorteo_en_curso==null){
             // return \Redirect::back()->with("message",'No hay sorteos');
             $participantes = [];
@@ -25,22 +27,19 @@ class AdminController extends Controller
         else{
             $participantes = User::join('sorteos_usuarios as SU','SU.usuario_id','users.id')
             ->join('sorteos','sorteos.id','SU.sorteo_id')
-            ->where([['SU.sorteo_id',$sorteo_en_curso->id],['SU.confirmar_pago',1]])->get();
+            ->where([['SU.sorteo_id',$sorteo_en_curso->sorteo_id],['SU.confirmar_pago',1]])->get();
             $dataParticipantes = $participantes->toArray();
  
         }
                
         $dataParticipantes = json_encode($dataParticipantes);
 
-        $ganadores = Sorteo::join('sorteos_usuarios as RU','RU.sorteo_id','sorteos.id')
-            ->join('users as U','U.id','RU.usuario_id')
-            ->join('premios_primero as PP','PP.usuario_id','U.id')
-            ->join('premios_segundo as PS','PS.usuario_id','U.id')
-            ->join('premios_tercero as PT','PT.usuario_id','U.id')
+        $ganadores = Ganador::join('sorteos_usuarios as SU','SU.id','ganadores.sorteo_usuario_id')
+            ->join('users as U','U.id','SU.usuario_id')
             ->get();
         $dataGanadores = $ganadores->toArray();
         $dataGanadores = json_encode($dataGanadores);
-
+        // dd($ganadores);
         return \View::make('admin.dashboard',compact('participantes','ganadores','dataParticipantes','dataGanadores'));
     }
 

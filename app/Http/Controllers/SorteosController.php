@@ -299,20 +299,73 @@ class SorteosController extends Controller
     public function asignarGanadores()
     {
         $sorteo_en_curso = SorteoEnCurso::first();
+        if($sorteo_en_curso==null){
+            return redirect()->action('SorteosController@mostrarSorteos')->with("message",'Debe activar un sorteo primero');
+        }
         $sorteo = Sorteo::where('id',$sorteo_en_curso->sorteo_id)->first();
         $participantes = SorteoUsuario::where([['sorteos_usuarios.sorteo_id',$sorteo->id],['sorteos_usuarios.confirmar_pago',1]])
                 ->join('users','users.id','sorteos_usuarios.usuario_id')
                 ->join('sorteos','sorteos.id','sorteos_usuarios.sorteo_id')
+                ->select('sorteos_usuarios.id as id_su','sorteos_usuarios.*','users.*','sorteos.*')
                 ->get();
         $dataParticipantes = $participantes->toArray();
         $dataParticipantes = json_encode($dataParticipantes);
-        $consulta_ganadores = Ganador::where('sorteo_id',$sorteo->id)->get();
+        $consulta_ganadores = Ganador::join('sorteos_usuarios as SU','SU.id','ganadores.sorteo_usuario_id')
+            ->where('SU.sorteo_id',$sorteo->id)->get();
         return \View::make('sorteos.asignar-ganadores',compact('sorteo_en_curso','sorteo','participantes','dataParticipantes','consulta_ganadores'));
     }
 
-    public function asignarPremio($sorteo_id,$usuario_id,$lugar)
+    public function asignarPremio($sorteo_usuario_id,$lugar)
     {
-        $sorteo = Sorteo::find($sorteo_id);
+
+        $sorteo_en_curso=SorteoEnCurso::first();
+        $consulta_ganadores=Ganador::join('sorteos_usuarios as SU','SU.id','ganadores.sorteo_usuario_id')
+            ->select('ganadores.*','SU.*','ganadores.id as id_ganador')
+            ->where('SU.sorteo_id',$sorteo_en_curso->sorteo_id)->get();
+        $si_hay=0;
+        $ganador_anterior=null;
+        foreach ($consulta_ganadores as $key => $consulta) {
+            if($lugar==$consulta->lugar){
+                $si_hay=1;
+                $ganador_anterior=$consulta;
+            }
+        }
+        if($si_hay==1){
+           
+            $sorteo_usuario = SorteoUsuario::find($ganador_anterior->sorteo_usuario_id);
+            $sorteo_usuario->estado_ganador=0;
+            $sorteo_usuario->save();
+
+            $sorteo_usuario = SorteoUsuario::find($sorteo_usuario_id);
+            $sorteo_usuario->estado_ganador=1;
+            $sorteo_usuario->save();
+            $sorteo = Sorteo::find($sorteo_usuario->sorteo_id);
+            $pago= $sorteo->precio_sorteo;
+            if($lugar==1){
+                $pago = $pago*0.50;
+            }
+            elseif($lugar==2){
+                $pago = $pago*0.20;
+            }
+            else{
+                $pago = $pago*0.10;
+            }
+
+            $ganador= Ganador::find($ganador_anterior->id_ganador);
+            $ganador->sorteo_usuario_id = $sorteo_usuario_id;
+            $ganador->lugar = $lugar;
+            $ganador->pago = $pago;
+            $ganador->updated_at = Carbon::now()->format('Y-m-d H:i:s');
+            $ganador->save();
+
+            return \Redirect::back()->with("message",'Premio cambiado exitósamente');
+        }
+       
+        $sorteo_usuario = SorteoUsuario::find($sorteo_usuario_id);
+        $sorteo_usuario->estado_ganador=1;
+        $sorteo_usuario->save();
+
+        $sorteo = Sorteo::find($sorteo_usuario->sorteo_id);
         $pago= $sorteo->precio_sorteo;
         if($lugar==1){
             $pago = $pago*0.50;
@@ -324,8 +377,7 @@ class SorteosController extends Controller
             $pago = $pago*0.10;
         }
         $ganador = new Ganador;
-        $ganador->usuario_id = $usuario_id;
-        $ganador->sorteo_id = $sorteo_id;
+        $ganador->sorteo_usuario_id = $sorteo_usuario_id;
         $ganador->lugar = $lugar;
         $ganador->pago = $pago;
         $ganador->created_at = Carbon::now()->format('Y-m-d H:i:s');
@@ -336,15 +388,47 @@ class SorteosController extends Controller
         return \Redirect::back()->with("message",'Premio asignado exitósamente');
     }
 
-    public function cambiarPremio($id,$usuario_id,$lugar)
+    public function cambiarPremio($id,$sorteo_usuario_id,$lugar)
     {
 
-        // dd(Ganador::find($id));
-        $ganador = Ganador::find($id);
-        $sorteo = Sorteo::find($ganador->sorteo_id);
+        // dd($id);
+        $sorteo_en_curso=SorteoEnCurso::first();
+        $consulta_ganadores=Ganador::join('sorteos_usuarios as SU','SU.id','ganadores.sorteo_usuario_id')
+            ->select('ganadores.*','SU.*','ganadores.id as id_ganador')
+            ->where('SU.sorteo_id',$sorteo_en_curso->sorteo_id)->get();
+        $si_hay=0;
+        $ganador_anterior=null;
+        foreach ($consulta_ganadores as $key => $consulta) {
+            if($lugar==$consulta->lugar){
+                $si_hay=1;
+                $ganador_anterior=$consulta;
+            }
+        }
+        if($si_hay==1){
+            $borrar_ganador = Ganador::find($ganador_anterior->id_ganador);
+            $borrar_ganador->delete();
+            $sorteo_usuario = SorteoUsuario::find($ganador_anterior->sorteo_usuario_id);
+            $sorteo_usuario->estado_ganador=0;
+            $sorteo_usuario->save();
+        }
+        // dd(Ganador::where('sorteo_usuario_id',$sorteo_usuario_id)->first());
+        $ganador = Ganador::where('sorteo_usuario_id',$sorteo_usuario_id)->first();
+        $sorteo = Sorteo::join('sorteos_usuarios as SU','SU.sorteo_id','sorteos.id')->where('SU.id',$sorteo_usuario_id)->first();
         $pago= $sorteo->precio_sorteo;
-        
-        $ganador->usuario_id = $usuario_id;
+        if($lugar==1){
+            $pago = $pago*0.50;
+        }
+        elseif($lugar==2){
+            $pago = $pago*0.20;
+        }
+        else{
+            $pago = $pago*0.10;
+        }
+        $sorteo_usuario = SorteoUsuario::find($sorteo_usuario_id);
+        $sorteo_usuario->estado_ganador=1;
+        $sorteo_usuario->save();
+
+        $ganador->sorteo_usuario_id = $sorteo_usuario_id;
         $ganador->lugar = $lugar;
         $ganador->pago = $pago;
         $ganador->updated_at = Carbon::now()->format('Y-m-d H:i:s');
@@ -352,5 +436,20 @@ class SorteosController extends Controller
 
         // return response()->json($ganador);
         return \Redirect::back()->with("message",'Premio cambiado exitósamente');
+    }
+
+    public function activarSorteo($id)
+    {
+        $sorteo_en_curso= SorteoEnCurso::first();
+        if($sorteo_en_curso==null){
+            $sorteo_en_curso= new SorteoEnCurso;
+            $sorteo_en_curso->created_at = Carbon::now()->format('Y-m-d H:i:s');
+        }
+
+        $sorteo_en_curso->sorteo_id = $id;
+        $sorteo_en_curso->updated_at = Carbon::now()->format('Y-m-d H:i:s');
+        $sorteo_en_curso->save();
+        // $sorteo = $id;
+        return response()->json($sorteo_en_curso);
     }
 }

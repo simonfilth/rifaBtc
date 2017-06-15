@@ -84,14 +84,18 @@
         <div class="col-sm-12">
             <table id="table-responsive" class="table table-condensed table-striped sortable ">
                 <thead>
-                    <th>{{trans('mensajes.nombre')}}</th>
-                    <th>{{trans('mensajes.id-wallet')}}</th>
+                    <th>{{trans('mensajes.name')}}</th>
+                    <!-- <th>{{trans('mensajes.id-wallet')}}</th> -->
+                    <th>{{trans('mensajes.puesto')}}</th>
+                    <th>{{trans('mensajes.premio')}}</th>
                     <th>{{trans('mensajes.fecha-sorteo')}}</th>
                 </thead>
                 <tbody>
                     <tr v-for="ganador in ganadores">   
                         <td>@{{ganador.name}} @{{ganador.apellido}}</td>
-                        <td>@{{ganador.id_wallet}}</td>
+                        <!-- <td>@{{ganador.id_wallet}}</td> -->
+                        <td>@{{ganador.lugar}}</td>
+                        <td>@{{ganador.pago}}</td>
                         <td>@{{ganador.fecha_sorteo}}</td>
                     </tr>
                     <template v-if="ganadores.length == 0">

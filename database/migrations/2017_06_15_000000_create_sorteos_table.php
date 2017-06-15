@@ -19,7 +19,6 @@ class CreateSorteosTable extends Migration
             $table->date('fecha_sorteo')->nullable();
             $table->float('precio_sorteo')->nullable();
             $table->time('hora_sorteo')->nullable();
-            // $table->string('estado_sorteo', 45);
             $table->string('estado_sorteo', 45)->default('No realizado');
             $table->timestamps();
         });

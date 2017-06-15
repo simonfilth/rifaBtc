@@ -17,8 +17,12 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
     return [
         'name' => $faker->name,
+        'apellido' => $faker->lastname,
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
+        'id_wallet' => str_random(10),
         'remember_token' => str_random(10),
+        'created_at' => Carbon\Carbon::now()->format('Y-m-d H:i:s'),
+        'updated_at' => Carbon\Carbon::now()->format('Y-m-d H:i:s'),
     ];
 });

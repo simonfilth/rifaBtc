@@ -20,6 +20,7 @@ class CreateSorteosUsuariosTable extends Migration
             $table->unsignedInteger('usuario_id');
             $table->string('id_transferencia');
             $table->unsignedTinyInteger('confirmar_pago')->default('0');
+            $table->unsignedTinyInteger('estado_ganador')->default('0');
 
             $table->unique(["id_transferencia"], 'unique_sorteos_usuarios');
             $table->timestamps();

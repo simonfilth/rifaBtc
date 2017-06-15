@@ -124,8 +124,14 @@
                                 </td>
                             </template>
                             <template v-else>
-                                <td>              
-                                    {{trans('mensajes.inactivo')}}
+                                <td> 
+                                    <a v-if="sorteo.estado_sorteo=='En Curso'" @click.prevent="activarSorteo(sorteo)"  class="btn btn-primary btn-block">
+                                        {{trans('mensajes.activar')}}
+                                    </a>
+                                    <a v-else>
+                                        {{trans('mensajes.inactivo')}}
+                                    </a>             
+                                    
                                 </td>
                             </template>
                         </tr>
@@ -133,7 +139,7 @@
                         
                         <template v-if="sorteos.length == 0">
                             <tr>
-                                <td colspan="4" align="center">
+                                <td colspan="6" align="center">
                                     {{trans('mensajes.todavia-no-hay-sorteos')}}
                                 </td>
                             </tr>
@@ -143,7 +149,7 @@
                 
                 @include('layouts.partials.pagination')
                 <!-- <pre>
-                    @ { { $data }}  
+                    @{{ $data }}  
                 </pre> -->
 
             </div>
@@ -210,8 +216,8 @@ const app = new Vue({
                 axios.get('cargar-sorteos?page='+page).then(function (response) {
 
 
-                    console.log("sorteos");
-                    console.log(response.data.data.data);
+                    /*console.log("sorteos");
+                    console.log(response.data.data.data);*/
                     app.$nextTick(function() {
                         
                         this.sorteos = response.data.data.data;
@@ -228,9 +234,9 @@ const app = new Vue({
                     app.$nextTick(function() {
                         
                         this.sorteo_en_curso = response.data.data.sorteo_id;;
-                        console.log("sorteos en curso");
+                        /*console.log("sorteos en curso");
                         console.log(response.data);
-                        console.log(this.sorteo_en_curso);
+                        console.log(this.sorteo_en_curso);*/
                     })
                 });
             },
@@ -242,8 +248,8 @@ const app = new Vue({
             comenzarSorteo: function(sorteo) {
 
                 axios.post('comenzar-sorteo-en-curso/'+sorteo.id).then(function (response) {
-                    console.log("respuesta");
-                    console.log(response.data);
+                    /*console.log("respuesta");
+                    console.log(response.data);*/
                     app.getVueSorteos();
                     // this.sorteos = this.sorteos.filter(function (response) {
                         // if(item.id == sorteo.id){
@@ -279,7 +285,17 @@ const app = new Vue({
                     console.log(response);
                     app.getVueSorteos();
                 })
+            },
+            activarSorteo: function(sorteo,en_curso) {
+
+                axios.post('activar-sorteo/'+sorteo.id).then(function (response) {
+                    console.log("respuesta");
+                    console.log(response);
+                    app.getVueSorteos();
+                    app.getVueSorteoEnCurso();
+                })
             }
+
         }
      });
 

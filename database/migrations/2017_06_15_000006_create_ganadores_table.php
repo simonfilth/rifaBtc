@@ -16,20 +16,14 @@ class CreateGanadoresTable extends Migration
         Schema::create('ganadores', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->unsignedInteger('sorteo_id');
-            $table->unsignedInteger('usuario_id');
+            $table->unsignedInteger('sorteo_usuario_id');
             $table->unsignedTinyInteger('lugar');
             $table->float('pago');
             $table->timestamps();
 
 
-            $table->foreign('sorteo_id', 'ganadores_sorteoid_foreign_idx')
-                ->references('id')->on('sorteos')
-                ->onDelete('restrict')
-                ->onUpdate('restrict');
-
-            $table->foreign('usuario_id', 'ganadores_usuarioid_foreign_idx')
-                ->references('id')->on('users')
+            $table->foreign('sorteo_usuario_id', 'ganadores_sorteousuarioid_foreign_idx')
+                ->references('id')->on('sorteos_usuarios')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
         });
