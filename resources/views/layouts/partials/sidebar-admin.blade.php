@@ -47,6 +47,10 @@
                   <li>
                     <a class="btn-block" href="{{url('jugar-ruleta')}}"><i class="fa fa-play fa-lg"></i> {{trans('mensajes.jugar-ruleta')}}</a>
                   </li>
+
+                  <li>
+                    <a class="btn-block" href="{{url('asignar-ganadores')}}"><i class="fa fa-trophy fa-lg"></i> {{trans('mensajes.asignar-ganadores')}}</a>
+                  </li>
              
               </ul>
             </div>

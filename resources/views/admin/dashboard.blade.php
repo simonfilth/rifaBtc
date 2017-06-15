@@ -209,77 +209,9 @@ var dataGanadores = {!! $dataGanadores !!};
         data: {
             participantes: dataParticipantes,
             ganadores: dataGanadores,
-            /*participantes: [],
-            ganadores: [],*/
-            // pagination: {
-            //     total: 0,
-            //     per_page: 2,
-            //     from: 1,
-            //     to: 0,
-            //     current_page: 1,
-            // },
-            // offset: 4,
-            // formErrors: {},
-            // formErrorsUpdate: {}
             clickParticipantes: false,
             clickGanadores: false
-        },
-        // mounted() {
-            // this.getVueDashboard();
-            // this.getVueGanadores();
-           /* this.getVueDashboard(this.pagination.current_page);
-            this.getVueGanadores(this.pagination.current_page);*/
-            
-        // },
-        // methods: {
-           /* getVueDashboard: function(page) {
-                axios.get('cargar-datos-dashboard?page='+page).then(function (response) {
-                    vm.$nextTick(function() {
-                        console.log(response.data.data);
-                        this.participantes = response.data.data.data;;
-                        this.pagination = response.data.pagination;
-
-                    })
-                });
-            },
-            getVueGanadores: function(page) {
-                axios.get('cargar-datos-ganadores?page='+page).then(function (response) {
-                    vm.$nextTick(function() {
-                        console.log(response.data.data);
-                        this.ganadores = response.data.data.data;
-                        this.pagination = response.data.pagination;
-
-                    })
-                });
-            },
-            changePageGanadores: function(page) {
-                this.pagination.current_page = page;
-                this.getVueGanadores(page);
-            },
-            changePageParticipantes: function(page) {
-                this.pagination.current_page = page;
-                this.getVueDashboard(page);
-            }*/
-            /*getVueDashboard: function() {
-                axios.get('cargar-datos-dashboard').then(function (response) {
-                    vm.$nextTick(function() {
-                        console.log("participantes");
-                        console.log(response.data.data);
-                        this.participantes = response.data.data;
-                    })
-                });
-            },*/
-           /* getVueGanadores: function() {
-                axios.get('cargar-datos-ganadores').then(function (response) {
-                    vm.$nextTick(function() {
-                        console.log("ganadores");
-                        console.log(response);
-                        this.ganadores = response.data.data;
-
-                   })
-                });
-            } */
-        // }
+        }
      });
  </script>
 @endsection

@@ -63,6 +63,9 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::post('sorteo-no-realizado/{id}', 'SorteosController@sorteoNoRealizado');
 
 		Route::get('jugar-ruleta', 'SorteosController@jugarRuleta');
+		Route::get('asignar-ganadores', 'SorteosController@asignarGanadores');
+		Route::get('asignar-premio/{sorteo_id}/{usuario_id}/{lugar}', 'SorteosController@asignarPremio');
+		Route::get('cambiar-premio/{id}/{usuario_id}/{lugar}', 'SorteosController@cambiarPremio');
 	});
 
 	Route::group(['middleware' => 'roles','roles' => ['Administrador', 'Cliente']], function () {

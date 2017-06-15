@@ -130,5 +130,7 @@ return [
     'activo-inactivo'=>'Activo/Inactivo',
     'activo'=>'Activo',
     'inactivo'=>'Inactivo',
+    'asignar-ganadores'=>'Asignar Ganadores',
+    'elegir'=>'Elegir',
 
 ];

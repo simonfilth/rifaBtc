@@ -8,6 +8,7 @@ use App\Http\Requests\TransferenciasRequest;
 use App\modelos\Sorteo;
 use App\modelos\SorteoUsuario;
 use App\modelos\SorteoEnCurso;
+use App\modelos\Ganador;
 use Carbon\Carbon;
 use App\User;
 use Auth;
@@ -293,5 +294,63 @@ class SorteosController extends Controller
     {
         
         return \View::make('sorteos.jugar-ruleta');
+    }
+
+    public function asignarGanadores()
+    {
+        $sorteo_en_curso = SorteoEnCurso::first();
+        $sorteo = Sorteo::where('id',$sorteo_en_curso->sorteo_id)->first();
+        $participantes = SorteoUsuario::where([['sorteos_usuarios.sorteo_id',$sorteo->id],['sorteos_usuarios.confirmar_pago',1]])
+                ->join('users','users.id','sorteos_usuarios.usuario_id')
+                ->join('sorteos','sorteos.id','sorteos_usuarios.sorteo_id')
+                ->get();
+        $dataParticipantes = $participantes->toArray();
+        $dataParticipantes = json_encode($dataParticipantes);
+        $consulta_ganadores = Ganador::where('sorteo_id',$sorteo->id)->get();
+        return \View::make('sorteos.asignar-ganadores',compact('sorteo_en_curso','sorteo','participantes','dataParticipantes','consulta_ganadores'));
+    }
+
+    public function asignarPremio($sorteo_id,$usuario_id,$lugar)
+    {
+        $sorteo = Sorteo::find($sorteo_id);
+        $pago= $sorteo->precio_sorteo;
+        if($lugar==1){
+            $pago = $pago*0.50;
+        }
+        elseif($lugar==2){
+            $pago = $pago*0.20;
+        }
+        else{
+            $pago = $pago*0.10;
+        }
+        $ganador = new Ganador;
+        $ganador->usuario_id = $usuario_id;
+        $ganador->sorteo_id = $sorteo_id;
+        $ganador->lugar = $lugar;
+        $ganador->pago = $pago;
+        $ganador->created_at = Carbon::now()->format('Y-m-d H:i:s');
+        $ganador->updated_at = Carbon::now()->format('Y-m-d H:i:s');
+        $ganador->save();
+
+        // return response()->json($ganador);
+        return \Redirect::back()->with("message",'Premio asignado exitósamente');
+    }
+
+    public function cambiarPremio($id,$usuario_id,$lugar)
+    {
+
+        // dd(Ganador::find($id));
+        $ganador = Ganador::find($id);
+        $sorteo = Sorteo::find($ganador->sorteo_id);
+        $pago= $sorteo->precio_sorteo;
+        
+        $ganador->usuario_id = $usuario_id;
+        $ganador->lugar = $lugar;
+        $ganador->pago = $pago;
+        $ganador->updated_at = Carbon::now()->format('Y-m-d H:i:s');
+        $ganador->save();
+
+        // return response()->json($ganador);
+        return \Redirect::back()->with("message",'Premio cambiado exitósamente');
     }
 }
