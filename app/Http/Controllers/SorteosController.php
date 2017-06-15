@@ -148,16 +148,14 @@ class SorteosController extends Controller
     public function unirseSorteo()
     {
         $sorteo_en_curso = SorteoEnCurso::first();
-        $sorteo = Sorteo::where('id',$sorteo_en_curso->sorteo_id)->first();
         
-        // dd($sorteo);
-        if ($sorteo==null) {
+        if ($sorteo_en_curso==null) {
             if(Auth::user()->tipo_usuario=='Cliente'){
                 return redirect()->action('AdminController@dashboard')->with('message','No hay sorteos en este momento');
             }
             return redirect()->action('SorteosController@agregarSorteo')->with('message','Agregue una sorteo primero');
         }
-
+        $sorteo = Sorteo::where('id',$sorteo_en_curso->sorteo_id)->first();
         $sorteos = SorteoUsuario::where([['sorteos_usuarios.sorteo_id',$sorteo->id],['sorteos_usuarios.usuario_id',Auth::user()->id]])
             ->join('sorteos','sorteos.id','sorteos_usuarios.sorteo_id')
             ->get();
@@ -191,12 +189,14 @@ class SorteosController extends Controller
             $sorteo = Sorteo::find($id);
         }
         else{
-            $sorteo_en_curso = SorteoEnCurso::first();
-            $sorteo = Sorteo::where('id',$sorteo_en_curso->sorteo_id)->first();
-            if ($sorteo==null) {
+            $sorteo_en_curso = SorteoEnCurso::first();    
+            if ($sorteo_en_curso==null) {
                 if(Auth::user()->tipo_usuario=='Cliente'){
                     return redirect()->action('ClientesController@panelCliente')->with('message','No hay sorteos en este momento');
                 }
+            }
+            else{
+                $sorteo = Sorteo::where('id',$sorteo_en_curso->sorteo_id)->first();
             }
             if (Auth::user()->tipo_usuario=="Administrador") {
                 $sorteos_usuarios = SorteoUsuario::where('sorteos_usuarios.sorteo_id',$sorteo->id)
@@ -270,13 +270,14 @@ class SorteosController extends Controller
     public function premios()
     {
         $sorteo_en_curso = SorteoEnCurso::first();
-        $sorteo = Sorteo::where('id',$sorteo_en_curso->sorteo_id)->first();
-        if($sorteo==null){
+        
+        if($sorteo_en_curso==null){
             if(Auth::user()->tipo_usuario=='Cliente'){
                 return redirect()->action('AdminController@dashboard')->with("message",'No hay sorteos todavía');
             }
             return redirect()->action('SorteosController@agregarSorteo')->with("message",'Debe agregar un sorteo primero');
         }
+        $sorteo = Sorteo::where('id',$sorteo_en_curso->sorteo_id)->first();
         $total = $sorteo->precio_sorteo;
         $primero = $total*0.50;
         $segundo = $total*0.20;
@@ -317,7 +318,6 @@ class SorteosController extends Controller
 
     public function asignarPremio($sorteo_usuario_id,$lugar)
     {
-
         $sorteo_en_curso=SorteoEnCurso::first();
         $consulta_ganadores=Ganador::join('sorteos_usuarios as SU','SU.id','ganadores.sorteo_usuario_id')
             ->select('ganadores.*','SU.*','ganadores.id as id_ganador')

@@ -120,7 +120,7 @@ return [
     'participa'=>'Participa',
     'una-vez-registrado'=>'Una vez registrado, podras acceder a tu panel adminstrativo donde podras entrar al sorteo',
     'juega'=>'Juega',
-    'cuando-estes-participando'=>'Cuando estes participando, deberas esperar el momento que se llenen la cantidad de 50 jugadores y se estara avisando el momento en que se realizará el sorteo en vivo',
+    'cuando-estes-participando'=>'Cuando estes participando, deberas esperar el momento que se complete la cantidad de 50 jugadores y se estara avisando el momento en que se realizará el sorteo en vivo',
     'cuando-participar'=>'¿Como participar?',
     'como-jugar'=>'¿Como jugar?',
     'como-jugar-1'=>'Una vez realizada la compra de boleto usted debera seguir las siguientes instrucciones:',

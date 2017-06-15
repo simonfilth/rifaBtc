@@ -46,7 +46,7 @@ class RegisterController extends Controller
         $foto_usuario->foto_perfil="default-profile-pic.png";
         $foto_usuario->save(); 
 
-        return redirect()->action('HomeController@index');
+        return redirect()->action('AdminController@dashboard');
     }
 
 

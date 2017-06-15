@@ -151,11 +151,9 @@ Home
 	<header id="fh5co-header" class="fh5co-cover fh5co-cover-background" role="banner">
 		<div class="row">
 			<div class="col-sm-12">
-				{!! Html::image('cryptosorteo/images/cryptoruleta.png', 'Cryptoruleta', array('height' => '250', 'width' => '250')) !!}
+				{!! Html::image('cryptosorteo/images/cryptoruleta.png', 'Cryptoruleta', array('height' => '250', 'width' => '250','style'=>'margin-left:50px;')) !!}
 			</div>
 		</div>
-		
-
 	</header>
 
 	<div id="fh5co-services" class="fh5co-bg-section">
