@@ -54,7 +54,7 @@
                     <div class="panel-body">
                         <!-- <p><i class="fa fa-calendar"></i> {{$sorteo->fecha_sorteo}}</p> -->
                         <!-- <p><i class="fa fa-clock-o"></i> {{$sorteo->hora_sorteo}}</p> -->
-                        <p><i class="fa fa-money"></i> {{trans('mensajes.precio-sorteo')}} {{$precio_por_persona}} <i class="fa fa-btc"></i> </p> 
+                        <p><i class="fa fa-money"></i> {{trans('mensajes.precio-sorteo')}} 0.01 <i class="fa fa-btc"></i> </p> 
                         @include('errors.errors')
 
                         {!! Form::open(['url' =>['guardar-union-sorteo',$sorteo->id], 'method' => 'POST']) !!}

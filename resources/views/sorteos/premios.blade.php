@@ -17,14 +17,20 @@
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <div class="panel panel-green">
+            <div class="panel">
             	<div class="panel-heading">
             		<h2 class="panel-title">
-            			{{trans('mensajes.total')}}
+            			
             		</h2>
-            		{{$total}}
+            		
             	</div>
-            	Puede ser una imagen del pote
+                <div class="panel-body">
+                    {!! Html::image('imagenes/premio-acumulado.jpeg', 'Imagen', array('class' => 'img-responsive')) !!}
+                    <p class="total-acumulado">
+                        {{trans('mensajes.total')}} {{trans('mensajes.acumulado')}}<br>
+                        {{$total}} <i class="fa fa-btc"></i>
+                    </p>
+                </div>
             	
             </div>
         </div>

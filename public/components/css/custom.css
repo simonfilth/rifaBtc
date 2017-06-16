@@ -164,3 +164,16 @@ body{
 .href-panel:hover{
     color:white;
 }
+
+.img-flag{
+    width: 25px;
+    height: 25px;
+}
+
+.total-acumulado{
+    color:white;
+    position: absolute;
+    top:20%;
+    left:10%;
+    font-size: 30px;
+}

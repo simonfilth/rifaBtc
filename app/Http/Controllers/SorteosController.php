@@ -293,8 +293,12 @@ class SorteosController extends Controller
 
     public function jugarRuleta()
     {
-        
-        return \View::make('sorteos.jugar-ruleta');
+        $jugadores = SorteoEnCurso::join('sorteos_usuarios as SU','SU.sorteo_id','sorteos_en_curso.sorteo_id')
+            ->join('users','users.id','SU.usuario_id')
+            ->where('SU.confirmar_pago',1)
+            ->select('users.name','users.apellido')
+            ->get();
+        return \View::make('sorteos.jugar-ruleta',compact('jugadores'));
     }
 
     public function asignarGanadores()

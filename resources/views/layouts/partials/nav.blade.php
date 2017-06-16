@@ -81,14 +81,14 @@
 
                 @if(session()->get('lang')=='en')
                     <li>
-                    <a href="{{ url('lang', ['es']) }}">En
-                        <!-- {!! Html::image('assets/imagenes/idioma-icons/eeuu-icon.png', 'Imagen', array('class' => 'img-flag')) !!} -->
+                    <a href="{{ url('lang', ['es']) }}">
+                        {!! Html::image('imagenes/banderas/english.png', 'Imagen', array('class' => 'img-flag')) !!}
                     </a>
                     </li>
                 @else
                     <li>
-                    <a href="{{ url('lang', ['en']) }}">Es
-                        <!-- {!! Html::image('assets/imagenes/idioma-icons/ecuador-icon.png', 'Imagen', array('class' => 'img-flag')) !!} -->
+                    <a href="{{ url('lang', ['en']) }}">
+                        {!! Html::image('imagenes/banderas/spanish.png', 'Imagen', array('class' => 'img-flag')) !!}
                     </a>
                     </li>
                 @endif

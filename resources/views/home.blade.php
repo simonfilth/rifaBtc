@@ -39,7 +39,11 @@ Home
 	{!! Html::style('cryptosorteo/css/style.css') !!}
 	{!! Html::style('cryptosorteo/css/landing22.css') !!}
 	{!! Html::style('components/css/font-awesome.min.css') !!}
-	
+	<style type="text/css" media="screen">
+		.img-flag{
+    		width: 30px;
+		}
+	</style>		
 	</head>
 	<body>
 
@@ -133,14 +137,14 @@ Home
 
 						@if(session()->get('lang')=='en')
 		                    <li>
-		                    <a href="{{ url('lang', ['es']) }}">Es
-		                        <!-- {!! Html::image('assets/imagenes/idioma-icons/eeuu-icon.png', 'Imagen', array('class' => 'img-flag')) !!} -->
+		                    <a href="{{ url('lang', ['es']) }}">
+		                        {!! Html::image('imagenes/banderas/english.png', 'Imagen', array('class' => 'img-flag')) !!}
 		                    </a>
 		                    </li>
 		                @else
 		                    <li>
-		                    <a href="{{ url('lang', ['en']) }}">En
-		                        <!-- {!! Html::image('assets/imagenes/idioma-icons/ecuador-icon.png', 'Imagen', array('class' => 'img-flag')) !!} -->
+		                    <a href="{{ url('lang', ['en']) }}">
+		                        {!! Html::image('imagenes/banderas/spanish.png', 'Imagen', array('class' => 'img-flag')) !!}
 		                    </a>
 		                    </li>
 		                @endif
