@@ -128,9 +128,9 @@
                                     <a v-if="sorteo.estado_sorteo=='En Curso'" @click.prevent="activarSorteo(sorteo)"  class="btn btn-primary btn-block">
                                         {{trans('mensajes.activar')}}
                                     </a>
-                                    <a v-else>
+                                    <p v-else>
                                         {{trans('mensajes.inactivo')}}
-                                    </a>             
+                                    </p>             
                                     
                                 </td>
                             </template>

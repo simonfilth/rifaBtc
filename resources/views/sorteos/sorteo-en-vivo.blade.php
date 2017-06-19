@@ -23,8 +23,13 @@
             			{{trans('mensajes.sorteo-en-vivo')}}
             		</h2> -->
             	</div>
-            	Aca pondremos pantalla youtube
             	
+            	<div class="panel-body text-center">
+                 <iframe width="560" height="315" src="https://gaming.youtube.com/embed/MvDCZAeRnbk" frameborder="0" allowfullscreen></iframe>  
+                 <br>
+                 <iframe width="480" height="270" src="https://gaming.youtube.com/live_chat?v=MvDCZAeRnbk&embed_domain=http://rifa-bitcoins.dev/sorteo-en-vivo" frameborder="0" allowfullscreen=""></iframe>   
+
+                </div>
             </div>
         </div>
     </div>
